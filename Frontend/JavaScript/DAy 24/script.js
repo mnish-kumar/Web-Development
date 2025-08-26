@@ -43,10 +43,3 @@
 
 
 // 2 -> Question create map function your own
-
-
-
-
-
-
-
