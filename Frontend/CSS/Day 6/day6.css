@@ -1,0 +1,120 @@
+#btnhover:hover {
+    background-color: palevioletred;
+    color: white;
+    border-radius: 3px;
+    border: 1px solid black;
+    font-weight: bold;
+    box-shadow: 2px 5px 15px black;
+}
+
+input:focus {
+    color: burlywood;
+}
+
+p::before {
+    content: "*HEY! mai before hu -> ";
+}
+p::after{
+    content: "*HEY! mai after hu";
+}
+
+
+#btnTrans {
+    color: rgb(4, 14, 14);
+    background-color: yellow;
+    transition: all cubic-bezier(0.19, 1, 0.22, 1) 0.3s;
+    /* transition: all ease-in 2s;
+    transition: all ease-out 3s; 
+    transition: all ease-in-out 2.5s;
+    */
+}
+#btnTrans:hover {
+    color: black;
+    background-color: burlywood;
+}
+
+.container {
+    height: 700px;
+    width: 100%;
+    background-color: rgb(117, 211, 22);
+    position: relative;
+}
+
+.x-axis {
+    position: absolute;
+    top: 100px;
+    left: 0;
+    height: 2px;
+    width: 100px;
+    background-color: blue;
+}
+.y-axis {
+    position: absolute;
+    top: 0;
+    left: 100px;
+    height: 100px;
+    width: 2px;
+    background-color: green;
+    
+}
+.box {
+    height: 150px;
+    width: 150px;
+    background-color: rgb(13, 114, 114);
+
+    transform: translate(100px , 100px);
+}
+
+.rotate{
+    height: 100px;
+    width : 100px;
+    position: relative;
+    top: 150px;
+    left: 40px;
+    background-color: pink;
+    transform: rotate(30deg);
+}
+
+.scale {
+    height: 100px;
+    width: 100px;
+    background-color: wheat;
+    position: relative;
+    top: 200px;
+    left: 30px;
+    
+}
+.sc {
+    height: 100px;
+    width: 100px;
+    transform: scale(.7);
+    background-color: #fff;
+}
+
+.skew{
+    height: 100px;
+    width: 100px;
+    color: white;
+    background-color: blue;
+    position: relative;
+    top: 210px;
+    left: 20px;
+    transform: skew(10deg , 10deg);
+}
+
+body {
+    perspective: 200px;
+}
+
+.tra{
+    height: 100px;
+    width: 100px;
+    background-color: red;
+
+    animation: chacha 1s cubic-bezier(0.19, 1, 0.22, 1) 2s both;
+}
+
+@keyframes chacha {
+    from {background-color: red;}
+    to{background-color: yellow;}
+}

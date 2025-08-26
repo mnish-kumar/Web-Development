@@ -1,0 +1,848 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background-color: #FDFBF5;
+}
+
+html {
+  font-family: Helvetica;
+}
+
+main {
+  padding: 1.2rem;
+  padding-top: 2rem;
+  width: 100%;
+  border: 1px solid black;
+}
+
+body {
+  padding: 0.8rem;
+}
+
+.view-1 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.view-1 img {
+  -o-object-fit: cover;
+     object-fit: cover;
+  width: 100%;
+  border-radius: 1rem;
+}
+.view-1 p {
+  font-weight: 200;
+  opacity: 0.8;
+}
+.view-1 h1 {
+  font-weight: 300;
+  font-size: 3.8rem;
+  width: 60%;
+}
+
+.view-2 {
+  margin: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+}
+.view-2 p {
+  font-weight: 200;
+  opacity: 0.8;
+}
+.view-2 .top {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.view-2 .top h1 {
+  font-weight: 400;
+  font-size: 3rem;
+  width: 90%;
+}
+.view-2 .top button {
+  padding: 1rem;
+  border: 0.7rem;
+  border-radius: 0.5em;
+  background-color: black;
+  color: rgb(255, 255, 255);
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.view-2 .line {
+  width: 100%;
+  height: 0.1rem;
+  background-color: black;
+}
+.view-2 .bottom {
+  display: flex;
+  gap: 2rem;
+  flex-direction: column;
+}
+.view-2 .bottom .elem {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.view-2 .bottom .elem img {
+  width: 4rem;
+  aspect-ratio: 1/1;
+}
+.view-2 .bottom .elem h1 {
+  font-weight: 500;
+  font-size: 2rem;
+}
+.view-2 .bottom .elem p {
+  font-weight: 200;
+  opacity: 0.8;
+  font-size: 1.2rem;
+}
+
+.divider {
+  width: 100%;
+  margin: 1rem 0;
+}
+.divider .line {
+  width: 100%;
+  height: 0.1rem;
+  background-color: black;
+}
+
+.view-3 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.view-3 .top {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+.view-3 .top h1 {
+  font-weight: 400;
+  font-size: 3rem;
+  width: 90%;
+}
+.view-3 .top p {
+  font-weight: 200;
+  opacity: 0.8;
+  font-size: 1.3rem;
+}
+.view-3 .top button {
+  background-color: black;
+  color: white;
+  padding: 0.6rem 1.3rem;
+  border: 0.7rem;
+  border-radius: 0.5em;
+  width: -moz-fit-content;
+  width: fit-content;
+  font-weight: 300;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  margin-top: 2rem;
+}
+.view-3 .line {
+  width: 100%;
+  height: 0.1rem;
+  background-color: black;
+  margin: 1rem 0;
+}
+.view-3 .bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+.view-3 .bottom .elem img {
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 1rem;
+}
+.view-3 .bottom .elem .text {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 0;
+}
+.view-3 .bottom .elem .text h2 {
+  font-weight: 530;
+  font-size: 1.6rem;
+  font-family: "Syne", sans-serif;
+}
+.view-3 .bottom .elem .text p {
+  font-weight: 50;
+  font-size: 1rem;
+}
+
+.divider {
+  width: 100%;
+  margin: 1rem 0;
+}
+.divider .line {
+  width: 100%;
+  height: 0.1rem;
+  background-color: black;
+}
+
+.view-4 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.view-4 .top {
+  display: flex;
+  flex-direction: column;
+}
+.view-4 .top .Icon img {
+  width: 18%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  opacity: 0.4;
+  margin: 1rem 0;
+}
+.view-4 .top .top-part h2 {
+  font-size: 3rem;
+  font-weight: 500;
+  font-family: "Syne", sans-serif;
+}
+.view-4 .top .top-part p {
+  letter-spacing: 2px;
+  font-weight: 200;
+  line-height: 1.8rem;
+  margin-top: 2rem;
+}
+.view-4 .bottom .text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.view-4 .bottom .text p {
+  letter-spacing: 2px;
+  font-weight: 200;
+  line-height: 1.6rem;
+  margin-top: -1rem;
+}
+.view-4 .bottom .text button {
+  background-color: black;
+  border-radius: 0.5rem;
+  color: white;
+  padding: 0.4rem 0.8rem;
+  width: -moz-fit-content;
+  width: fit-content;
+  font-size: 1rem;
+  font-weight: 100;
+  margin-top: 1.5rem;
+  border: 0px;
+}
+
+.view-5 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.view-5 .head {
+  display: flex;
+  justify-content: center;
+}
+.view-5 .head h1 {
+  font-size: 2.3rem;
+  font-weight: 550;
+}
+.view-5 .breaker {
+  height: 0.1rem;
+  width: 100%;
+  background-color: black;
+}
+.view-5 .image-section img {
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 1rem;
+}
+.view-5 .image-section .container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
+  gap: 2rem;
+}
+.view-5 .image-section .container .design {
+  display: flex;
+  gap: 2rem;
+  width: 100%;
+}
+.view-5 .image-section .container .design .icon p {
+  border: 1px solid black;
+  border-radius: 50%;
+  padding: 0.5rem;
+}
+.view-5 .image-section .container .design .text-area {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.view-5 .image-section .container .design .text-area h3 {
+  font-family: "Syne", sans-serif;
+  font-size: 2rem;
+  font-weight: 500;
+}
+.view-5 .image-section .container .design .text-area p {
+  font-weight: 100;
+  opacity: 90%;
+  line-height: 1.4rem;
+  font-size: 1rem;
+}
+
+.view-6 {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+}
+.view-6 .top {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  gap: 2rem;
+}
+.view-6 .top img {
+  width: 4rem;
+  opacity: 50%;
+  aspect-ratio: 1/1;
+}
+.view-6 .top p {
+  font-weight: 200;
+  opacity: 0.9;
+}
+.view-6 .top h1 {
+  font-size: 3rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  padding: 1rem 0;
+}
+.view-6 .bottom {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  margin-top: -3rem;
+}
+.view-6 .bottom p {
+  opacity: 0.9;
+  font-size: 1.2rem;
+  line-height: 1.8rem;
+  font-weight: 100;
+}
+.view-6 .bottom button {
+  width: -moz-fit-content;
+  width: fit-content;
+  background-color: black;
+  color: white;
+  border: 0;
+  padding: 0.6rem 1.1rem;
+  border-radius: 0.5rem;
+  font-weight: 100;
+  font-size: 1rem;
+}
+
+.view-7 {
+  width: 100%;
+  background-color: black;
+  height: 1px;
+  margin-top: 2rem;
+}
+
+.view-8 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.view-8 .head {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.view-8 .head h1 {
+  font-size: 2.2rem;
+  font-weight: 590;
+  padding: 2rem;
+}
+.view-8 .line {
+  width: 100%;
+  height: 1px;
+  background-color: black;
+}
+.view-8 .bottom .elem {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 0;
+  gap: 1rem;
+}
+.view-8 .bottom .elem img {
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 0.8rem;
+}
+.view-8 .bottom .elem p {
+  font-weight: 400;
+  font-stretch: 100%;
+  text-transform: uppercase;
+  font-size: normal;
+  text-align: left;
+}
+.view-8 .bottom .elem h2 {
+  font-family: "Syne", sans-serif;
+  font-weight: 500;
+}
+
+.view-9 {
+  width: 100%;
+  background-color: black;
+  height: 1px;
+}
+
+.view-10 {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 0;
+}
+.view-10 .icon .img {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+.view-10 .icon .img .a {
+  width: 15%;
+}
+.view-10 .icon .img .b {
+  width: 22%;
+}
+.view-10 .icon .para {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 1rem 0;
+}
+.view-10 .icon .para p {
+  font-size: 1rem;
+  font-weight: 100;
+  line-height: 1.7rem;
+  opacity: 0.8;
+}
+.view-10 .social-media {
+  display: flex;
+  flex-direction: row;
+  gap: 0.8rem;
+  opacity: 0.8;
+  margin-top: 4rem;
+}
+.view-10 .social-media p {
+  border: 1.2px solid black;
+  border-radius: 50%;
+  padding: 0.5rem;
+  font-size: 15px;
+  opacity: 100%;
+}
+.view-10 .line {
+  background-color: black;
+  width: 100%;
+  height: 1px;
+  margin-top: 2rem;
+}
+.view-10 .bottom .page {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+.view-10 .bottom .page .upper p {
+  font-family: "Syne";
+  font-weight: 500;
+  font-size: 1.7rem;
+}
+.view-10 .bottom .page .lower {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+.view-10 .bottom .page .lower p {
+  font-family: "Roboto Mono";
+  font-weight: 400;
+  text-transform: uppercase;
+}
+.view-10 .bottom button {
+  padding: 0.6rem 1.2rem;
+  background-color: black;
+  color: white;
+  width: -moz-fit-content;
+  width: fit-content;
+  border-radius: 10px;
+  letter-spacing: 2px;
+  margin: 2rem 0;
+}
+
+.view-11 {
+  background-color: black;
+  height: 1px;
+  width: 100%;
+  margin-top: -2rem;
+}
+
+.view-12 {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 2rem 0;
+  text-align: center;
+}
+.view-12 .top {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1rem;
+}
+.view-12 .top p {
+  font-family: "Robotic";
+  font-weight: 100;
+  font-size: 1.2rem;
+}
+.view-12 .top a {
+  color: black;
+}
+.view-12 .bottom p {
+  font-family: "Robotic";
+  font-size: 1.3rem;
+  font-weight: 100;
+}
+
+@media (min-width: 1024px) {
+  main {
+    padding: 2rem;
+  }
+  .view-1 h1 {
+    font-size: 6rem;
+    width: 100%;
+  }
+  .view-2 {
+    margin-top: 3rem;
+    flex-direction: row;
+  }
+  .view-2 .top {
+    justify-content: space-between;
+  }
+  .view-2 .line {
+    height: initial;
+    width: 0.1rem;
+  }
+  .view-2 .bottom {
+    display: flex;
+    gap: 1.1rem;
+  }
+  .view-2 .bottom .line {
+    height: 1px;
+    width: 100%;
+    align-self: stretch;
+  }
+  .view-2 .bottom .elem p {
+    font-size: 1rem;
+  }
+  .divider {
+    width: 100%;
+  }
+  .divider .line {
+    margin-top: 5rem;
+    background-color: black;
+  }
+  .view-3 {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+  }
+  .view-3 .line {
+    height: initial;
+    width: 0.1rem;
+  }
+  .view-3 .top {
+    width: 35%;
+    padding: 1.7rem;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    height: -moz-fit-content;
+    height: fit-content;
+    align-self: flex-start;
+  }
+  .view-3 .top h1 {
+    font-size: 3.5rem;
+    font-weight: 400;
+  }
+  .view-3 .top p {
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 2.5rem;
+  }
+  .view-3 .top button {
+    font-size: small;
+    padding: 9px;
+  }
+  .view-3 .bottom {
+    width: 65%;
+    padding: 1.5rem;
+  }
+  .view-3 .bottom .elem.a img {
+    border-radius: 2.1rem;
+    width: 100%;
+  }
+  .view-3 .bottom .edit {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-self: center;
+    align-items: center;
+    gap: 2rem;
+  }
+  .view-3 .bottom .edit .elem.b {
+    width: 47%;
+    flex-direction: row;
+  }
+  .view-3 .bottom .edit .elem.c {
+    width: 47%;
+  }
+  .view-3 .bottom .edit .elem.d {
+    width: 47%;
+  }
+  .view-3 .bottom .edit .elem.e {
+    width: 47%;
+  }
+  .divider {
+    width: 100%;
+  }
+  .divider .line {
+    height: 1px;
+    margin-top: 3rem;
+  }
+  .view-4 {
+    display: flex;
+    flex-direction: row;
+    padding: 1rem;
+    margin-top: 4rem;
+    width: 100%;
+  }
+  .view-4 .top {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    margin-top: -1rem;
+    gap: 8rem;
+    width: 70%;
+  }
+  .view-4 .top .Icon {
+    width: 70%;
+    opacity: 100%;
+  }
+  .view-4 .top .top-part {
+    display: flex;
+    flex-direction: column;
+  }
+  .view-4 .top .top-part p {
+    font-size: 1rem;
+    letter-spacing: 1px;
+  }
+  .view-4 .top .top-part h2 {
+    font-size: 4.2rem;
+    font-weight: 500;
+  }
+  .view-4 .crop {
+    height: initial;
+    width: 1px;
+    background-color: black;
+  }
+  .view-4 .bottom {
+    width: 30%;
+    margin-top: 1rem;
+    padding: 0.5rem;
+  }
+  .view-4 .bottom .text {
+    display: flex;
+    flex-direction: column;
+    gap: 20rem;
+  }
+  .view-4 .bottom .text p {
+    font-size: medium;
+    font-weight: 200;
+    line-height: 2rem;
+  }
+  .view-5 .head h1 {
+    padding: 2rem;
+    font-size: 3.8rem;
+  }
+  .view-5 .breaker {
+    height: 1px;
+  }
+  .view-5 .image-section {
+    display: flex;
+    flex-direction: row;
+    margin: 1rem 0;
+    gap: 3rem;
+  }
+  .view-5 .image-section .image-container {
+    height: initial;
+    width: 1px;
+    background-color: black;
+  }
+  .view-5 .image-section img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -o-object-fit: cover;
+       object-fit: cover;
+  }
+  .view-5 .image-section .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .view-5 .image-section .container .design .text-area h3 {
+    font-size: 2rem;
+  }
+  .view-5 .image-section .container .design .text-area p {
+    font-weight: 100;
+    font-size: 19px;
+    opacity: 0.9;
+    line-height: 1.9rem;
+  }
+  .view-6 {
+    display: flex;
+    flex-direction: row;
+    margin-top: 4rem;
+    width: 100%;
+  }
+  .view-6 .line {
+    height: initial;
+    background-color: black;
+    width: 1px;
+  }
+  .view-6 .top {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: space-between;
+    gap: 15rem;
+    width: 70%;
+  }
+  .view-6 .top img {
+    width: 5rem;
+    opacity: 100%;
+  }
+  .view-6 .top .top-elem p {
+    font-weight: 100;
+    letter-spacing: 1px;
+  }
+  .view-6 .top .top-elem h1 {
+    font-size: 5rem;
+  }
+  .view-6 .bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem;
+    margin-top: 1px;
+    width: 30%;
+  }
+  .view-6 .bottom p {
+    font-size: 1.5rem;
+    font-weight: 100;
+    line-height: 2.5rem;
+  }
+  .view-6 .bottom button {
+    padding: 0.4rem 0.8rem;
+    border-radius: 5px;
+  }
+  .view-7 {
+    height: 1px;
+  }
+  .view-8 {
+    width: 100%;
+  }
+  .view-8 .head {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+  }
+  .view-8 .head h1 {
+    padding: 3rem;
+    font-size: 3.8rem;
+    margin-left: -3rem;
+    font-stretch: 100%;
+  }
+  .view-8 .line {
+    width: 100%;
+    height: 1px;
+  }
+  .view-8 .bottom {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    justify-content: center;
+    width: 100%;
+    padding: 1rem;
+    margin: 1rem 0;
+  }
+  .view-8 .bottom .elem {
+    width: 100%;
+  }
+  .view-10 {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 3rem;
+  }
+  .view-10 .line {
+    height: initial;
+    width: 1px;
+  }
+  .view-10 .icon {
+    width: 100%;
+    margin-top: 2rem;
+  }
+  .view-10 .icon .img {
+    width: 100%;
+  }
+  .view-10 .icon .img .a {
+    width: 10%;
+  }
+  .view-10 .icon .img .b {
+    width: 20%;
+  }
+  .view-10 .bottom {
+    display: flex;
+    flex-direction: row;
+    gap: 7rem;
+    padding-right: 4rem;
+  }
+  .view-10 .bottom button {
+    display: none;
+  }
+  .view-12 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2rem;
+  }
+}/*# sourceMappingURL=Style.css.map */

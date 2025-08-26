@@ -1,0 +1,111 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    overflow-x: hidden;
+}
+
+.page-header h1{
+    font-size: 2em;
+    margin-bottom: 10px;
+    color: #333;
+}
+.page-header p {
+    font-size: 1.1em;
+    color: #555;
+    text-align: center;
+}
+
+
+
+.galleryBox {
+    background-color: rgb(254, 255, 254);
+
+    max-width: 1200px;
+    border-radius: 8px;
+
+    display: grid;
+    padding: 20px;
+
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+@media (min-width : 768px){
+    .galleryBox {
+        grid-template-columns: repeat(2 , 1fr);
+    }
+}
+
+@media (min-width : 1024px){
+    .galleryBox {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.product-item {
+    border: 1px solid #ddd; /* Light grey border for each product item */
+    border-radius: 8px; /* Rounded corners for product items */
+    overflow: hidden; /* Ensures image corners respect border-radius */
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+    padding: 20px;
+    border: 1px solid black;
+}
+
+.product-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f7f7f7; 
+    border: 0.80px solid rgb(137, 133, 133);
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-details {
+    text-align: center;
+    padding-top: 13px;
+}
+
+.product-details h5 {
+    font-size: 1em;
+    line-height: 1;
+    margin-bottom: 5px;
+}
+.product-details p {
+    font-weight: 0.9em;
+    margin-bottom: 5px;
+}
+.product-details .price{
+    font-size: 1.1em;
+    color: #007bff;
+    font-weight: bold;
+}
+
+.page-footer {
+    font-size: 1em;
+    padding-top: 20px;
+    padding-bottom: 30px;
+    color: #777;
+}

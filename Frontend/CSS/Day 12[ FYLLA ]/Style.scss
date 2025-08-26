@@ -1,0 +1,1119 @@
+@mixin light-weight-font {
+    font-weight: 200;
+    opacity: 0.8;
+}
+
+@mixin divider_line{
+    width: 100%;
+    margin: 1rem 0;
+
+    .line{
+        width: 100%;
+        height: 0.1rem;
+        background-color: black;
+    }
+
+}
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,body{
+    width: 100%;
+    height: 100%;
+    background-color: #FDFBF5;
+}
+html{
+    font-family: Helvetica;
+}
+
+main{
+    padding: 1.2rem;
+    padding-top: 2rem;
+    width: 100%;
+    border: 1px solid black;
+}
+body{
+    padding: 0.8rem;
+}
+
+.view-1{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+
+    img{
+        object-fit: cover;
+        width: 100%;
+        border-radius: 1rem;
+    }
+
+    p{
+        @include light-weight-font;
+    }
+
+    h1{
+        font-weight: 300;
+        font-size: 3.8rem;
+        width: 60%;
+        
+    }
+}
+
+.view-2{
+    margin: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+
+    p{
+        @include light-weight-font;
+    }
+    .top{
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+
+        h1{
+        font-weight: 400;
+        font-size: 3rem;
+        width: 90%;
+        }
+
+        button{
+            padding:1rem;
+            border: 0.7rem;
+            border-radius: 0.5em;
+            background-color: black;
+            color: rgb(255, 255, 255);
+            width: fit-content;
+        }
+    }
+
+    .line{
+        width: 100%;
+        height: 0.1rem;
+        background-color: black;
+    }
+
+
+    .bottom{
+        display: flex;
+        gap: 2rem;
+        flex-direction: column;
+
+        .elem{
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+
+            img{
+            width: 4rem;
+            aspect-ratio: 1/1;
+            
+            }
+
+            h1{
+                font-weight: 500;
+                font-size: 2rem;
+            }
+
+            p {
+                @include light-weight-font;
+                font-size: 1.2rem;
+            }
+        }
+
+        
+    }
+
+}
+
+.divider{
+   @include divider_line();
+}
+
+
+.view-3{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    .top{
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+
+        h1{
+            font-weight: 400;
+            font-size: 3rem;
+            width: 90%;
+        }
+
+        p{
+            @include light-weight-font;
+            font-size: 1.3rem;
+        }
+
+        button{
+            background-color: black;
+            color: white;
+            padding: 0.6rem 1.3rem;
+            border: 0.7rem;
+            border-radius: 0.5em;
+            width: fit-content;
+            font-weight: 300;
+            font-size: 1rem;
+           letter-spacing: 2px;
+           margin-top: 2rem;
+           
+        }
+    }
+
+    .line{
+        width: 100%;
+        height: 0.1rem;
+        background-color: black;
+        margin: 1rem 0;
+    }
+
+    .bottom{
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        width: 100%;
+
+        
+
+        .elem{
+            
+
+            img{
+                width: 100%;
+                object-fit: cover;
+                border-radius: 1rem;
+            }
+
+            .text{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0.8rem 0;
+
+                h2{
+                    font-weight: 530;
+                    font-size: 1.6rem;
+                    font-family: "Syne", sans-serif;
+                }
+
+                p{
+                   font-weight: 50;
+                    font-size: 1rem;
+                    
+                }
+            }
+        }
+    }
+}
+
+.divider{
+   @include divider_line();
+}
+
+
+
+.view-4{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+
+    .top{
+        display: flex;
+        flex-direction: column;
+        
+
+        .Icon{
+        img{
+            width: 18%;
+            object-fit: cover;
+            opacity: 0.4;
+            margin: 1rem 0;
+        }
+    }
+
+    .top-part{
+        h2{
+            font-size: 3rem;
+            font-weight: 500;
+            font-family: "Syne", sans-serif;
+            
+        }
+
+        p{
+            letter-spacing: 2px;
+            font-weight: 200;
+            line-height: 1.8rem;
+            margin-top: 2rem;
+        }
+    }
+
+        
+    
+    }
+
+
+    .bottom{
+        .text{
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+
+        p{
+            letter-spacing: 2px;
+            font-weight: 200;
+            line-height: 1.6rem;
+            margin-top: -1rem;
+        }
+
+        
+
+        button{
+            background-color: black;
+            border-radius: 0.5rem;
+            color: white;
+            padding: 0.4rem 0.8rem;
+            width: fit-content;
+            font-size: 1rem;
+            font-weight: 100;
+            margin-top: 1.5rem;
+            border: 0px;
+        }
+        }
+    }
+    
+    
+}
+
+
+.view-5{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    .head{
+        display: flex;
+        justify-content: center;
+        
+        h1{
+            font-size: 2.3rem;
+            font-weight: 550;
+        }
+    }
+
+    .breaker{
+        height: 0.1rem;
+        width: 100%;
+        background-color: black;
+    }
+
+    .image-section{
+        
+        img{
+            width: 100%;
+            object-fit: cover;
+            border-radius: 1rem;
+        }
+    
+
+
+    .container{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        margin-top: 2rem;
+        gap: 2rem;
+
+
+        .design{
+            display: flex;
+            gap: 2rem;
+            width: 100%;
+
+
+            .icon{
+                p{
+                    border: 1px solid black;
+                    border-radius: 50%;
+                    padding: 0.5rem;
+                }
+            }
+
+            .text-area{
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                h3{
+                    font-family: 'Syne', sans-serif;
+                    font-size: 2rem;
+                    font-weight: 500;
+                }
+
+                p{
+                    font-weight: 100;
+                    
+                    opacity: 90%;
+                    line-height: 1.4rem;
+                    font-size: 1rem;
+                }
+            }
+        }
+
+        }
+    }
+
+        
+    }
+
+
+
+.view-6{
+    display: flex;
+    flex-direction: column;
+    gap:2rem;
+    width: 100%;
+    
+        
+    
+
+    .top{
+        display: flex;
+        flex-direction: column;
+        margin-top: 1rem;
+        gap: 2rem;
+
+        img{
+            width: 4rem;
+            opacity: 50%;
+            aspect-ratio: 1/1;
+        }
+
+       
+
+        p{
+            font-weight: 200;
+            opacity: 0.9;
+            
+        }
+
+        h1{
+            font-size: 3rem;
+            font-weight: 400;
+            text-transform: uppercase;
+            padding: 1rem 0;
+        }
+    }
+
+
+    .bottom{
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+        margin-top: -3rem;
+
+        p{
+            opacity: 0.9;
+            font-size: 1.2rem;
+            line-height: 1.8rem;
+            font-weight: 100;
+        }
+
+        button{
+            width: fit-content;
+            background-color: black;
+            color: white;
+            border: 0;
+            padding: 0.6rem 1.1rem;
+            border-radius: 0.5rem;
+            font-weight: 100;
+            font-size: 1rem;
+        }
+    }
+}
+
+.view-7{
+    width: 100%;
+    background-color: black;
+    height: 1px;
+    margin-top: 2rem;
+}
+
+
+.view-8{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .head{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        h1{
+            font-size: 2.2rem;
+            font-weight: 590;
+            padding: 2rem;
+
+        }
+    }
+
+    .line{
+        width: 100%;
+        height: 1px;
+        background-color: black;
+        
+    }
+    .bottom{
+        .elem{
+        display: flex;
+        flex-direction: column;
+        margin: 2rem 0;
+        gap: 1rem;
+
+        img{
+            width: 100%;
+            object-fit: cover;
+            border-radius: 0.8rem;
+        }
+
+        p{
+            font-weight: 400;
+            font-stretch: 100%;
+            text-transform: uppercase;
+            font-size: normal;
+            text-align: left;
+
+        }
+
+        h2{
+            font-family: "Syne", sans-serif;
+            font-weight: 500;
+        }
+    }
+        }
+       
+}
+
+.view-9{
+    width: 100%;
+    background-color: black;
+    height: 1px;
+}
+
+.view-10{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 2rem 0;
+
+    .icon{
+        .img{
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+            
+            .a{
+                width: 15%;
+            }
+            .b{
+                width: 22%;
+            } 
+        }
+
+        .para{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin: 1rem 0;
+
+            p{
+                font-size: 1rem;
+                font-weight: 100;
+                line-height: 1.7rem;
+                opacity: 0.8;
+            }
+        }
+    }
+
+        .social-media{
+           display: flex;
+           flex-direction: row;
+           gap: 0.8rem;
+           opacity: 0.8;
+           margin-top: 4rem;
+
+           p{
+            border: 1.2px solid black;
+            border-radius: 50%;
+            padding: 0.5rem;
+            font-size: 15px;
+            opacity: 100%;
+           }
+        }
+
+
+    
+
+    .line{
+        background-color: black;
+        width: 100%;
+        height: 1px;
+        margin-top: 2rem;
+     }
+
+    .bottom{
+
+    
+        .page{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-top: 2rem;
+
+            .upper{
+                p{
+                    font-family: "Syne";
+                    font-weight: 500;
+                    font-size: 1.7rem;
+                }
+            }
+
+            .lower{
+                display: flex;
+                flex-direction: column;
+                gap: 0.9rem;
+                p{
+                    font-family: "Roboto Mono";
+                    font-weight: 400;
+                    text-transform: uppercase;
+            }
+
+            }
+        }
+        button{
+            padding: 0.6rem 1.2rem;
+            background-color: black;
+            color: white;
+            width: fit-content;
+            border-radius: 10px;
+            letter-spacing: 2px;
+            margin: 2rem 0;
+        }
+    }
+}
+
+
+.view-11{
+    background-color: black;
+    height: 1px;
+    width: 100%;
+    margin-top: -2rem;
+}
+
+.view-12{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 2rem 0;
+    text-align: center;
+    
+        .top{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: 1rem;
+
+            p{
+                font-family: "Robotic";
+                font-weight: 100;
+                font-size: 1.2rem;
+            }
+            a{
+                color: black;
+            }
+        }
+
+        .bottom{
+            p{
+                font-family: "Robotic";
+                font-size: 1.3rem;
+                font-weight: 100;
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (min-width: 1024px){
+        main{
+            padding: 2rem;
+
+        }
+
+
+    .view-1 {
+        h1{
+            
+            font-size: 6rem;
+            width: 100%;
+        }
+    }
+
+    .view-2{
+        margin-top: 3rem;
+        flex-direction: row;
+
+
+        .top{
+            justify-content: space-between;
+        }
+
+        .line{
+            height: initial;
+            width: 0.1rem;
+        }
+
+        .bottom{
+            display: flex;
+            gap: 1.1rem;
+
+            .line{
+                height: 1px;
+                width: 100%;
+                align-self: stretch;
+            }
+
+            .elem{
+                p{
+                    font-size: 1rem;
+                }
+            }
+        }
+        
+        
+    }
+
+
+    .divider{
+        width: 100%;
+        .line{
+            margin-top: 5rem;
+            
+            
+            background-color: black;
+        }
+    }
+
+    .view-3{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+         
+        
+
+        .line{
+            height: initial;
+            width: 0.1rem;
+        }
+
+        .top{
+            width: 35%;
+            padding: 1.7rem;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+            height: fit-content;
+            align-self: flex-start;
+            
+
+
+            
+
+            h1{
+                font-size: 3.5rem;
+                
+                font-weight: 400;
+            }
+
+            p{
+                font-size: 1.4rem;
+                font-weight: 400;
+                line-height: 2.5rem;
+            }
+
+            button {
+                font-size: small;
+                padding: 9px;
+            }
+        }
+
+        .bottom{
+            width: 65%;
+            padding: 1.5rem;
+            
+           
+
+           .elem.a {
+                img{
+                    border-radius: 2.1rem;
+                    width: 100%;
+                }
+            }
+
+            .edit{
+                display: flex;
+                flex-wrap: wrap;
+                flex-direction: row;
+                justify-self: center;
+                align-items: center;
+                gap: 2rem;
+
+
+            .elem.b {
+                width: 47%;
+                flex-direction: row;
+                
+                
+            }
+
+            .elem.c {
+                width: 47%;
+            }
+
+            .elem.d {
+                width: 47%;
+            }
+            .elem.e {
+                width: 47%;
+            }
+
+            }
+
+        }
+    }
+
+
+    .divider{
+        width: 100%;
+        .line{
+            height: 1px;
+            margin-top: 3rem;
+        }
+    }
+
+    .view-4{
+        display: flex;
+        flex-direction: row ;
+        padding: 1rem;
+        margin-top: 4rem;
+        width: 100%;
+
+
+
+        .top{
+            display: flex;
+            flex-direction: column-reverse;
+            justify-content: space-between;
+            margin-top: -1rem;
+            gap: 8rem;
+            
+            width: 70%;
+            
+            .Icon{
+                width: 70%;
+                opacity: 100%;
+            }
+
+            .top-part{
+                display: flex;
+                flex-direction: column;
+
+                p{
+                    font-size: 1rem;
+                    letter-spacing: 1px;
+                }
+                
+                
+                h2{
+                    font-size: 4.2rem;
+                    font-weight: 500;
+                   
+                }
+            }
+        }
+
+        .crop{
+            height: initial;
+            width: 1px;
+            background-color: black;
+        }
+
+        .bottom{
+            width: 30%;
+            margin-top: 1rem;
+            padding: 0.5rem;
+           
+            .text{
+                display: flex;
+                flex-direction: column;
+                gap: 20rem;
+
+                p{
+                    font-size: medium;
+                    font-weight: 200;
+                    line-height: 2rem;
+                }
+            }
+        }
+    }
+
+
+    .view-5{
+        .head{
+            h1{
+                padding: 2rem;
+                font-size: 3.8rem;
+            }
+        }
+
+        .breaker{
+            height: 1px;
+        }
+        
+
+        .image-section{
+            display: flex;
+            flex-direction: row;
+            margin: 1rem 0;
+            gap: 3rem;
+
+            .image-container{
+                height: initial;
+                width: 1px;
+                background-color: black;
+            }
+
+            img{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                object-fit: cover;
+                
+            }
+
+
+            .container{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                    
+                .design{
+                   
+                    
+                    .text-area{
+                        h3{
+                            font-size: 2rem;
+                        }
+
+                        p{
+                            font-weight: 100;
+                            font-size: 19px;
+                            opacity: 0.9;
+                            line-height: 1.9rem;
+                        }
+                    }
+                }
+            }
+
+
+        }
+
+    }
+   
+
+    .view-6{
+        display: flex;
+        flex-direction: row;
+        margin-top: 4rem;
+        width: 100%;
+        
+        .line{
+            height: initial;
+            background-color: black;
+            width: 1px;
+        }
+
+        .top{
+           display: flex;
+           flex-direction: column-reverse;
+           justify-content: space-between;
+           gap: 15rem;
+           width: 70%;
+
+           img{
+            width: 5rem;
+            opacity: 100%;
+           }
+
+           .top-elem{
+            p{
+                font-weight: 100;
+                letter-spacing: 1px;
+                
+            }
+
+            h1{
+                font-size: 5rem;
+            }
+           }
+        }
+
+        .bottom{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 1rem;
+            margin-top: 1px;
+            width: 30%;
+
+            p{
+                font-size: 1.5rem;
+                font-weight:100;
+                line-height: 2.5rem;
+            }
+
+            button{
+                padding: 0.4rem 0.8rem;
+                border-radius: 5px;
+            }
+        }
+    }
+
+    .view-7{
+        height: 1px;
+    }
+
+    .view-8{
+        width: 100%;
+        
+        
+
+        .head{
+            display: flex;
+            flex-direction: row;
+            justify-content: start;
+            align-items: center;
+            width: 100%;
+            
+            h1{
+                padding: 3rem;
+                font-size: 3.8rem;
+                margin-left: -3rem;
+                font-stretch: 100%;
+            }
+        }
+
+        .line{
+            width: 100%;
+            height: 1px;
+        }
+
+
+        .bottom{
+            display: flex;
+            flex-direction: row;
+            gap: 2rem;
+            justify-content: center;
+            width: 100%;
+            padding: 1rem;
+            margin: 1rem 0;
+            
+            .elem{
+                width: 100%;
+            }
+        }
+
+    }
+
+    .view-10{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        gap: 3rem;
+
+        .line{
+            height: initial;
+            width: 1px;
+        }
+
+        .icon{
+            width: 100%;
+            margin-top: 2rem;
+            .img{
+                width: 100%;
+                .a{
+                    width: 10%;
+                }
+                .b{
+                    width: 20%;
+                }
+            }
+        }
+
+        .bottom{
+            display: flex;
+            flex-direction: row;
+            gap: 7rem;
+            padding-right: 4rem;
+
+            button{
+                display: none;
+            }
+        }
+
+
+    }
+
+
+    .view-12{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 2rem;
+    }
+
+}
+
+

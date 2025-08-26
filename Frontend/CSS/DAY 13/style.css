@@ -1,0 +1,92 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+html {
+  font-family: Helvetica, sans-serif;
+}
+
+main {
+  padding: 1rem;
+}
+
+.view-1 {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  padding-top: 5rem;
+}
+.view-1 .top {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.view-1 .top h1 {
+  font-size: 2.5rem;
+}
+.view-1 .top .h1-part {
+  opacity: 0.6;
+}
+.view-1 .bottom {
+  width: 100%;
+  display: grid;
+  gap: 0.9rem;
+  grid-template-areas: "a a b b" "a a b b" "a a b b" "a a b b" "a a b b" "a a c c" "a a c c" "a a c c";
+}
+.view-1 .bottom img {
+  height: 100%;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 1rem;
+}
+.view-1 .bottom .img-a {
+  grid-area: a;
+}
+.view-1 .bottom .img-b {
+  grid-area: b;
+}
+.view-1 .bottom .img-c {
+  grid-area: c;
+}
+
+@media (min-width: 1020px) {
+  main {
+    padding: 2.5rem;
+  }
+  .view-1 {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+  .view-1 .top {
+    width: 50%;
+  }
+  .view-1 .top h1 {
+    font-size: 4.9rem;
+  }
+  .view-1 .top p {
+    font-size: 1rem;
+    font-weight: 300;
+    opacity: 0.8;
+  }
+  .view-1 .bottom {
+    width: 50%;
+    aspect-ratio: 1/1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .view-1 .bottom .images {
+    max-width: 40rem;
+    grid-template-areas: ". . b b" "a a b b" "a a b b" "a a b b" "a a b b" "a a c c" "a a c c" ". . c c";
+  }
+}/*# sourceMappingURL=style.css.map */

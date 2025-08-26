@@ -1,0 +1,56 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.parent {
+    height: 400px;
+    width: 100%;
+    background-color: rgb(250, 194, 90);
+}
+
+.child {
+    height: 100px;
+    width: 100px;
+    background-color: rgb(90, 66, 21);
+}
+
+@media (min-width : 600px) {
+    .parent {
+        background-color: black;
+    }
+}
+
+.container {
+    width: 1000px;
+    height: 500px;
+    background-color: rgb(228, 110, 7);
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.box {
+    height: 200px;
+    width: 200px;
+    flex-shrink: 0;
+    background-color: pink;
+    border: 1.5px solid black;
+}
+
+
+.grid {
+    height: 1000px;
+    width: 1000px;
+    background-color: wheat;
+    display: grid;
+    grid-template-columns: 100px 200px 100px;
+    grid-template-rows: 100px 200px;
+}
+
+.gridChild {
+    background-color: red;
+    border: 1.5px solid black;
+    height: 300px;
+}

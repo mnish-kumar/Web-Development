@@ -1,0 +1,174 @@
+Today Work
+
+Creting a layout of this website given in image.
+
+
+✈ Responsive Travel Blog Layout – Project Notes
+
+📌 Project Overview
+
+This project is a responsive travel blog layout designed using HTML and CSS. The layout is optimized for both desktop and mobile devices, showcasing travel destinations, stories, and highlights. The goal is to create a clean and user-friendly interface that adjusts seamlessly across screen sizes.
+
+
+---
+
+🧱 Folder Structure
+
+travel-blog/
+│
+├── index.html         --> Main HTML file for structure
+├── style.css          --> CSS file for all styling and responsive design
+├── /images/           --> Folder to store all used images
+└── README.md          --> Project notes/documentation (this file)
+
+
+---
+
+📄 index.html
+
+The HTML file contains the following major sections:
+
+✅ Header Section
+
+Includes logo, navigation links (e.g., "Inspiration", "Trip Ideas", "Sign In"), and a search button.
+
+Fully responsive header with a mobile menu toggle.
+
+
+✅ Hero Section
+
+Catchy heading: "Discover the World’s Hidden Wonders".
+
+Supporting text and a CTA button to "Plan your trip".
+
+Grid of featured destination images over a world map background.
+
+
+✅ Top Destinations Section
+
+Horizontal scrollable (desktop) or vertical stack (mobile).
+
+Tabs for category filtering (e.g., USA, Europe, Asia).
+
+Card-style layout for each destination with an image, title, and location.
+
+
+✅ Latest Stories Section
+
+Lists recent travel blog articles.
+
+Includes title, category, read time, and publish date.
+
+Larger featured article with supporting mini-articles.
+
+
+✅ Trekker's Highlights Section
+
+Showcases a featured traveler, their review, and a trip gallery.
+
+Includes a quote and "See more highlights" CTA.
+
+
+✅ Newsletter Signup Section
+
+Input field to collect user emails.
+
+Encourages users to subscribe for updates.
+
+
+✅ Footer
+
+Logo + social icons.
+
+Multiple useful travel and company links (About, Terms, Destinations, etc.).
+
+
+
+---
+
+🎨 style.css
+
+The CSS file handles the following:
+
+✅ Responsive Layout
+
+Media queries used for different screen sizes (min-width, max-width breakpoints).
+
+Mobile-first approach: single-column layout for small screens, multi-column grid for desktop.
+
+
+✅ Typography & Spacing
+
+Clean and readable font styles.
+
+Proper use of padding/margin for spacing between sections.
+
+
+✅ Flexbox & Grid
+
+CSS Flexbox used in nav, header, and story lists.
+
+CSS Grid used in hero and destination sections.
+
+
+✅ Reusable Classes
+
+Utility classes for alignment, font sizes, buttons, etc., to avoid repetition.
+
+
+
+---
+
+📱 Mobile vs Desktop Design
+
+Feature	Desktop Layout	Mobile Layout
+
+Navigation	Horizontal navbar	Hamburger menu (☰ icon)
+Hero section	3 images in grid	2-column vertical stack
+Top Destinations	Multi-card row	Single card scroll
+Stories & Highlights	2-column + side mini articles	Stacked in a single column
+Footer	Spread layout	Stacked for smaller screens
+
+
+
+---
+
+🔧 Technologies Used
+
+HTML5
+
+CSS3 (Flexbox, Grid, Media Queries)
+
+No JavaScript used for now (pure static layout)
+
+
+
+---
+
+📝 How to Use
+
+1. Clone or download this folder.
+
+
+2. Open index.html in your browser.
+
+
+3. Open style.css to explore and modify styling.
+
+
+4. Use responsive tools in browser (e.g., Chrome DevTools) to test mobile layout.
+
+
+
+
+---
+
+📌 Next Steps / Suggestions
+
+Add animations for smooth transitions.
+
+Integrate with a CMS or backend for dynamic content.
+
+Add real images and content.
+
+Implement dark/light mode toggle functionality.
