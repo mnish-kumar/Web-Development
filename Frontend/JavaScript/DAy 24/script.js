@@ -80,3 +80,32 @@ function counter(){
 var makeCount = counter();
 makeCount();
 makeCount()
+
+
+
+
+
+
+// 4. Implement a function that limits how many times another function can be called (Closure + HOF).
+
+function functionLimit(fn , limit){
+
+    let totalCount = 0;
+
+    return function(){
+        if(totalCount < limit){
+            totalCount++;
+            fn();
+        }
+    }
+}
+
+var storeLimit = functionLimit(function (){
+    console.log("hey");
+    
+} , 4)  // 4 times se jyada function call n kar skte h
+
+storeLimit();
+storeLimit();
+storeLimit();
+storeLimit();
