@@ -61,3 +61,22 @@ function map(arr , fun){
 var ans = map(arr , function(value){
     return value + 2; // jo bhi value aayega usme 3 add akr do
 })
+
+
+
+
+
+
+// 3. Write a function that uses closures to create a counter.
+function counter(){
+    let count = 0;
+
+    return function(){
+       count++;
+       console.log(count);
+    }
+}
+
+var makeCount = counter();
+makeCount();
+makeCount()
