@@ -43,3 +43,21 @@
 
 
 // 2 -> Question create map function your own
+
+var arr = [1, 2, 3, 4, 5];
+// ek aisa function likho jo ek function return kare
+function map(arr , fun){
+    var newArr = [];
+
+    for(let i =0; i < arr.length; i++){
+        // newArr[i] = (fun(arr[i]));
+        newArr.push(fun(arr[i]));
+    }
+
+    return newArr;
+}
+
+// call the function
+var ans = map(arr , function(value){
+    return value + 2; // jo bhi value aayega usme 3 add akr do
+})
