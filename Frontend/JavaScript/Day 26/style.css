@@ -1,0 +1,23 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: gilroy
+}
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+
+#box{
+    width: 200px;
+    height: 200px;
+    background-color: orange;
+    margin: 10px 50px;
+}
+
+button{
+    margin-left: 50px;
+    padding: 3px;
+}
