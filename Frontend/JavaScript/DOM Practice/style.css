@@ -8,34 +8,26 @@ html,
 body {
   height: 100%;
   width: 100%;
+  padding: 10px;
 }
 
 
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-}
-
-.box {
-    height: 200px;
-    width: 200px;
-    background-color: orange;
-    text-align: center;
+.nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: rgb(193, 189, 189);
+    align-items: center;
     padding: 5px;
+    border-radius: 3px;
 }
 
-
-button{
-    padding: 4px;
-    border: solid 1px black;
-    border-radius: 2px;
-    background-color: white;
+.point{
+    display: flex;
+    gap: 50px;
 }
 
-button:hover{
-    background-color: lightgrey;
-    cursor: pointer;
+p{
+    font-size: 1.1rem;
+    font-weight: 500;
 }
-
