@@ -16,7 +16,7 @@ body {
   background-color: gray;
 }
 
-.box{
+/* .box{
     height: 300px;
     width: 300px;
     background-color: hotpink;
@@ -25,5 +25,31 @@ body {
 }
 button{
     padding: 0.2rem 0.8rem;
-}
+} */
 
+
+.box{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+button{
+    background-color: lightseagreen;
+    color: white;
+    border: none;
+    padding: 0.9rem 1.3rem;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 600;
+}
+h2{
+    font-size: 5rem;
+}
+h1{
+    font-size: 3rem;
+    background-color: #fff;
+    padding: 50px;
+    border-radius: 10px;
+}
