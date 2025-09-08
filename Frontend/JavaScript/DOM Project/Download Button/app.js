@@ -9,7 +9,6 @@ let clear;
 
 btn.addEventListener('click', function(){
     setInterval(function(){
-
         if (grow > 100){
             clearInterval(clear);
             btn.innerHTML = 'Downloaded'
