@@ -1,20 +1,25 @@
 import { nanoid } from "nanoid";
 import { useState } from "react";
+import "./Create.css";
 
 const Create = (props) => {
 
-    const todo = props.todo;
-    const setTodo = props.setTodo;
+  const todo = props.todo;
+  const setTodo = props.setTodo;
  
-    const[title, setTitle] = useState("");
+  const[title, setTitle] = useState("");
+  const [isImportant, setisImportant] = useState(false);
 
-    const SubmitHandler = (e) => {
+  const SubmitHandler = (e) => {
     e.preventDefault();
+
+    if (!title.trim) return;
 
     const newTodo = {
       id: nanoid(),
       title,
       isCompleted: false,
+      isImportant: isImportant,
     };
 
     const copyData = [...todo]; // create new variable
@@ -26,12 +31,13 @@ const Create = (props) => {
     // console.log(newTodo);
 
     setTitle("");
+    setisImportant(false);
   };
 
 
 
   return (
-    <div>
+    <div className="input-box">
       <h1>To do Tasks:</h1>
 
       <form onSubmit={SubmitHandler}>
@@ -43,11 +49,19 @@ const Create = (props) => {
           type="text"
           placeholder="Deatils"
         />
+
         <br />
-        <input type="checkbox" />
-        Complete
-        <br />
-        <button>Submit</button>
+        <label>
+          <input
+            type="checkbox"
+            onChange={(e) => setisImportant(e.target.checked)}
+            checked={isImportant}
+          />{" "}
+          Mark as important
+        </label>
+
+
+        <button>Add Task</button>
       </form>
     </div>
   );
