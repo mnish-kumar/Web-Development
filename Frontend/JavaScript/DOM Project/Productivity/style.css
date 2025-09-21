@@ -150,7 +150,7 @@ section.allElems{
   padding: 20px;
 }
 
-.todo-list-fullPage .todo-Container .addTask input, textarea{
+.todo-list-fullPage .todo-Container .addTask #text-input{
   width: 100%;
   padding: 15px 20px;
   font-size: 20px;
@@ -167,7 +167,7 @@ section.allElems{
   padding: 15px 20px;
   font-size: 20px;
   font-weight: 700;
-  background-color: crimson;
+  background-color: #455B65;
   border-radius: 5px;
   outline: none;
   border: none;
@@ -201,14 +201,45 @@ section.allElems{
   border-radius: 5px;
   margin-bottom: 20px;
 }
+.task p{
+  color: black;
+  padding: 4px 8px;
+  background-color: rgb(221, 216, 216);
+  font-size: 13px;
+  margin-top: 3px;
+  border-radius: 100px;
+}
+.task .details{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
 
 .task h5{
   color: var(--sec);
   font-size: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.task h5 span{
+  background-color: red;
+  padding: 3px  5px;
+  border-radius: 100px;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+.task h5 span.true{
+  opacity: 1;
+}
+.task h5 span.false{
+  opacity: 0;
 }
 
+
 .task button{
-  background-color: green;
+  background-color: #2F8D46;
   border: none;
   padding: 10px 15px;
   border-radius: 5px;
@@ -218,5 +249,29 @@ section.allElems{
 }
 .task button:active{
   scale: 0.97;
+}
+
+.addTask .mark-imp{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+  padding: 10px 20px;
+}
+
+.addTask .mark-imp input{
+  width: 20px;
+  height: 20px;
+  border: none;
+  cursor: pointer;
+}
+/* .addTask .mark-imp input[type="checkbox"].red:checked {
+  accent-color: red;
+} */
+
+.addTask .mark-imp label{
+  font-family: aeonik;
+  font-size: 20px;
+  font-weight: 600;
 }
 
