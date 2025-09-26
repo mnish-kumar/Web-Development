@@ -1,54 +1,61 @@
 import { nanoid } from "nanoid";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import "./Create.css";
 
-const Create = (props) => {
+const Create = ({todo, setTodo}) => {
 
-  const todo = props.todo;
-  const setTodo = props.setTodo;
- 
-  const[title, setTitle] = useState("");
+  const {
+    register, 
+    handleSubmit,
+    reset,
+    formState: { errors }
+  } = useForm();
+
+    
   const [isImportant, setisImportant] = useState(false);
 
-  const SubmitHandler = (e) => {
-    e.preventDefault();
+  const SubmitHandler = (data) => {
+    data.id = nanoid();
+    data.isCompleted = false;
+    data.isImportant = isImportant;
+    
 
-    if (!title.trim) return;
+    // if (!title.trim) return;
 
-    const newTodo = {
-      id: nanoid(),
-      title,
-      isCompleted: false,
-      isImportant: isImportant,
-    };
+    // const newTodo = {
+    //   id: nanoid(),
+    //   // title,
+    //   isCompleted: false,
+    //   isImportant: isImportant,
+    // };
 
+    // --> useState
     const copyData = [...todo]; // create new variable
-    copyData.push(newTodo); // copy the newTod in new variable
+    copyData.push(data); // copy the newTod in new variable
     setTodo(copyData); // update the value
 
     // setTodo([...todo] , newTodo);  -> short form of written
 
-    // console.log(newTodo);
+    reset();
 
-    setTitle("");
+    
     setisImportant(false);
   };
-
+  
 
 
   return (
     <div className="input-box">
       <h1>To do Tasks:</h1>
 
-      <form onSubmit={SubmitHandler}>
+      <form onSubmit={handleSubmit (SubmitHandler)}>
         <input
-          onChange={(e) => {
-            setTitle(e.target.value);
-          }}
-          value={title}
+          {...register("title", {required: "Tittle cannot be empty"})}
           type="text"
-          placeholder="Deatils"
+          placeholder="Details"
         />
+        {errors && errors.title && errors.title.message && <small>{errors.title.message}</small>}
 
         <br />
         <label>

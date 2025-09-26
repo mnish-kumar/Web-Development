@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import "./Read.css";
 
 const Read = (props) => {
@@ -25,7 +24,7 @@ const Read = (props) => {
   const rendering = todos.map((e) => {
     return (
       <li key={e.id} className="todo-item">
-         <span className="todo-title">
+        <span className="todo-title">
           {e.title}
           {e.isImportant && <span className="important-badge">Imp</span>}
         </span>
