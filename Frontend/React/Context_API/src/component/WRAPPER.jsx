@@ -1,8 +1,13 @@
+// export const context = createContext(null)
 
-const WRAPPER = (props) => {
-    console.log(props.info);
+// const WRAPPER = (props) => {
+//   console.log(props.info);
 
-  return (props.App)
-}
+//   return (
+//     <context.Provider value={"hello from context"}>
+//       {props.children}
+//     </context.Provider>
+//   );
+// }
 
-export default WRAPPER
+// export default WRAPPER
