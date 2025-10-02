@@ -1,1 +1,12 @@
 @import "tailwindcss";
+
+/* All slides default small + transparent
+.swiper-slide {
+  @apply opacity-50 scale-75;
+  transition: all 0.4s ease-in-out;
+}
+
+/* Active center slide big + visible 
+.swiper-slide-active {
+  @apply opacity-100 scale-100;
+} */

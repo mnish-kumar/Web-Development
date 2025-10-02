@@ -1,5 +1,5 @@
 import {useContext} from 'react';
-import { recipecontext as dataContext } from '../context/RecipeContext';
+import { RecipecontextData as dataContext } from '../context/RecipeContext';
 import RecipeCard from '../components/RecipeCard';
 
 
@@ -11,7 +11,7 @@ const Recipes = () => {
   ));
 
   return (
-    <div className='flex gap-15 flex-wrap justify-center'>
+    <div className='flex flex-row gap-7 flex-wrap justify-around'>
       {data.length > 0 ? renderRecipes : "No recipes found!"}
     </div>
   )
