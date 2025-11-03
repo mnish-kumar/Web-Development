@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form"; 
 import { nanoid } from '@reduxjs/toolkit';
-import { asyncgetuser } from '../store/UserAction';
+import { asyncgetuser } from '../store/actions/userAction';
 import { useDispatch } from 'react-redux';
 
 

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useForm } from "react-hook-form"; 
-import { asyncLoginUser } from '../store/UserAction';
+import { asyncLoginUser } from '../store/actions/userAction';
 import { useDispatch } from 'react-redux';
 
 

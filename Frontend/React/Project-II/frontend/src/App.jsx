@@ -1,19 +1,19 @@
 import { useEffect } from "react";
-import {asyncCurrentUser} from './store/UserAction'
+import {asyncCurrentUser} from './store/actions/userAction'
 import { useDispatch } from "react-redux";
 import MainRoutes from "./routes/MainRoutes"
 import Nav from "./components/Nav";
+import { asyncLoadProducts } from "./store/actions/productAction";
 
 const App = () => {
 
-  // const data = useSelector((state) => state);
-  // console.log(data);
-
-
   // Actions se dat aaya
   const dispatch = useDispatch();
+
+
   useEffect(() => {
     dispatch(asyncCurrentUser());
+    dispatch(asyncLoadProducts());
   }, [])
   
 

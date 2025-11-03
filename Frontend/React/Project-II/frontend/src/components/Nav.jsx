@@ -1,22 +1,36 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
-
-
-
-const navLinks = [
-  { name: "Home", path: "/" },
-  { name: "Products", path: "/products" },
-  { name: "Login", path: "/login" },
-];
+import { NavLink, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { asyncLogOutUser } from "../store/actions/userAction";
 
 const ProductionNav = ({ brandName = "Shopify" }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.userReducer.users);
 
-  // Function to close the menu, useful for NavLink clicks
+  // 1. Base links that are always visible
+  const baseNavLinks = [
+    { name: "Home", path: "/" },
+    { name: "Products", path: "/products" },
+  ];
+
+  const navLinks = [
+    ...baseNavLinks,
+    ...(user
+      ? [{ name: "Create Product", path: "/admin/create-product" }]
+      : [{ name: "Login", path: "/login" }]),
+  ];
+
   const closeMenu = () => setIsMenuOpen(false);
+  const handleLogout = () => {
+    dispatch(asyncLogOutUser());
+    navigate("/");
+    closeMenu();
+  };
 
-  // Common Tailwind classes for links to avoid repetition
-  const linkBaseClasses = "hover:text-gray-600 transition-colors duration-200";
+  // Common Tailwind classes for links
+  const linkBaseClasses = "hover:text-gray-600 transition-colors duration-200 cursor-pointer";
   const linkActiveClasses = "text-gray-900 underline underline-offset-4";
 
   return (
@@ -33,11 +47,10 @@ const ProductionNav = ({ brandName = "Shopify" }) => {
           aria-expanded={isMenuOpen}
           aria-controls="nav-menu"
         >
-          {/* A better UX is to show a close icon when the menu is open */}
           {isMenuOpen ? (
-            <i className="ri-close-line"></i> // Replace with <RiCloseLine /> if using react-icons
+            <i className="ri-close-line"></i> // Assumes you have icon CSS
           ) : (
-            <i className="ri-menu-line"></i> // Replace with <RiMenuLine /> if using react-icons
+            <i className="ri-menu-line"></i> // Assumes you have icon CSS
           )}
         </button>
 
@@ -49,7 +62,9 @@ const ProductionNav = ({ brandName = "Shopify" }) => {
             ${isMenuOpen ? "translate-x-0" : "-translate-x-full"}
           `}
         >
-          <ul className="flex flex-col gap-8 text-lg font-medium md:flex-row md:gap-6">
+          {/* Added md:items-center to align logout button on desktop */}
+          <ul className="flex flex-col gap-8 text-lg font-medium md:flex-row md:gap-6 md:items-center">
+            {/* 4. Map over the clean navLinks array */}
             {navLinks.map((link) => (
               <li key={link.name}>
                 <NavLink
@@ -63,6 +78,17 @@ const ProductionNav = ({ brandName = "Shopify" }) => {
                 </NavLink>
               </li>
             ))}
+
+            {user && (
+              <li>
+                <button
+                  onClick={handleLogout}
+                  className="py-1 px-4 bg-gray-800 text-white rounded-lg shadow-md hover:bg-gray-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500"
+                >
+                  Log Out
+                </button>
+              </li>
+            )}
           </ul>
         </div>
       </nav>
