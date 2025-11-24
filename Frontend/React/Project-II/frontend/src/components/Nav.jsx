@@ -24,7 +24,7 @@ const ProductionNav = ({ brandName = "ShopVerse" }) => {
   const linkActiveClasses = "text-gray-900 underline underline-offset-4";
 
   return (
-    <header className="w-full bg-[#FAB12F] font-[Poppins] shadow-md mb-5 rounded">
+    <header className="w-full bg-[#f3b54b] font-[Poppins] shadow-md mb-5 rounded">
       <nav className="container mx-auto flex items-center justify-between p-4">
         {/* Brand Name */}
         <h1 className="text-3xl font-bold">{brandName}</h1>

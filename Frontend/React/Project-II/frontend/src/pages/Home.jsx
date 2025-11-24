@@ -4,7 +4,7 @@ const Home = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-b from-amber-50 to-white text-gray-800">
+    <div className="min-h-screen flex flex-col  text-gray-800">
       {/* 🌟 HERO SECTION */}
       <section className="flex flex-col items-center justify-center text-center py-20 px-6 bg-amber-100 rounded-b-3xl shadow-md">
         <h1 className="text-5xl font-extrabold mb-4 text-amber-600">

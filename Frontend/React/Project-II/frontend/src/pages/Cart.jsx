@@ -1,17 +1,15 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
 import { asyncUpdateUserProfile } from '../store/actions/userAction';
-
-
 
 const Cart = () => {
   const dispatch = useDispatch();
 
-  // Select the user object directly. 
-  // We don't use the problematic object creation pattern here, following best practice.
-  const user = useSelector((state) => state.userReducer.users); 
+  // Select the user object directly.
+  const user = useSelector((state) => state.userReducer.users);
 
-  // Safely check for user and cart
+  // --- Defensive Initial Check ---
+  // Safely check for user, cart, and cart length
   if (!user || !user.cart || user.cart.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center h-64 bg-gray-50 p-6 rounded-lg shadow-md m-4">
@@ -30,78 +28,134 @@ const Cart = () => {
           />
         </svg>
         <div className="text-xl font-semibold text-gray-700">Your cart is empty</div>
-        <Link to="/" className="mt-4 text-blue-600 hover:text-blue-800 font-medium">
+        <Link to="/products" className="mt-4 text-blue-600 hover:text-blue-800 font-medium">
           Start Shopping
         </Link>
       </div>
     );
   }
 
-
-
-  // Assuming 'c.product.price' and 'c.quantity' are reliable numbers
+  // --- Calculation Logic (FIXED: Added robust checks) ---
   const subtotal = user.cart.reduce(
-    (acc, item) => acc + item.product.price * item.quantity,
+    (acc, item) => {
+      // Use optional chaining (?. ) and nullish coalescing ( || 0) 
+      // to ensure item.product, item.product.price, and item.quantity exist 
+      // before attempting multiplication. This fixes the TypeError.
+      const price = item?.product?.price || 0;
+      const quantity = item?.quantity || 0;
+      return acc + price * quantity;
+    },
     0
   );
-  const tax = subtotal * 0.10; 
+
+  const tax = subtotal * 0.10;
   const shipping = subtotal > 100 ? 0 : 10;
   const grandTotal = subtotal + tax + shipping;
 
-  // Function stubs for interaction (needs backend logic)
-  const handleQuantityIncrease = (index, product) => {
-    const copyUser = { ...user, cart: [...user.cart] };
-    
-    copyUser.cart[index] = {
-      product: product,
-      quantity: copyUser.cart[index].quantity + 1,
-    }
+  // --- Cart Interaction Handlers ---
 
-    // Update user profile with the new cart
-    dispatch(asyncUpdateUserProfile(copyUser.id, copyUser));
-  };
+  const handleQuantityIncrease = (index) => {
+    // 1. Create a copy of the cart array
+    const updatedCart = [...user.cart];
 
-  const handleQuantityDecrease = (index, product) => {
-    const copyUser = { ...user, cart: [...user.cart] };
-    
-    copyUser.cart[index] = {
-      product: product,
-      quantity: copyUser.cart[index].quantity - 1,
-    }
-    // Update user profile with the new cart
-    dispatch(asyncUpdateUserProfile(copyUser.id, copyUser));
+    // 2. Update the specific item's quantity immutably
+    updatedCart[index] = {
+      ...updatedCart[index], // Spread the existing item object
+      quantity: (updatedCart[index]?.quantity || 0) + 1, // Safely increment quantity
+    };
+
+    // 3. Create a new user object with the updated cart
+    const updatedUser = { ...user, cart: updatedCart };
+
+    // 4. Dispatch the action
+    dispatch(asyncUpdateUserProfile(updatedUser.id, updatedUser));
   };
 
   const handleRemoveItem = (productId) => {
-    const copyUser = { ...user, cart: user.cart.filter(c => c.product.id !== productId) };
-    copyUser.cart[productId] = [];
-    dispatch(asyncUpdateUserProfile(copyUser.id, copyUser));
+    // 1. Ensure product ID comparison is type-safe
+    const numericProductId = Number(productId); 
+
+    // 2. CREATE THE NEW CART ARRAY WITH DEFENSIVE CHECK (The fix is here)
+    const updatedCart = user.cart.filter(c => {
+        // Check 1: Ensure the cart item 'c' and 'c.product' exist
+        if (!c || !c.product) {
+            return false; // Exclude malformed items
+        }
+        
+        // Check 2: Perform the actual removal comparison
+        return Number(c.product.id) !== numericProductId;
+    });
+
+    // 3. Create the new user object with the updated cart
+    const updatedUser = { 
+        ...user, 
+        cart: updatedCart 
+    };
+
+    // 4. Dispatch the update action (Check for ID consistency is good practice)
+    if (updatedUser.id) {
+        dispatch(asyncUpdateUserProfile(updatedUser.id, updatedUser));
+    } else {
+        console.error("User ID is missing. Cannot dispatch profile update.");
+    }
+};
+
+  const handleQuantityDecrease = (index) => {
+    // Get the current quantity safely
+    const currentQuantity = user.cart[index]?.quantity || 0;
+
+    // If quantity is 1, remove the item instead of setting it to 0
+    if (currentQuantity <= 1) {
+      handleRemoveItem(user.cart[index].product.id);
+      return;
+    }
+
+    // Create a copy of the cart array
+    const updatedCart = [...user.cart];
+
+    // Update the specific item's quantity immutably
+    updatedCart[index] = {
+      ...updatedCart[index],
+      quantity: currentQuantity - 1, // Decrement the quantity
+    };
+
+    // Create a new user object with the updated cart
+    const updatedUser = { ...user, cart: updatedCart };
+
+    // Dispatch the action
+    dispatch(asyncUpdateUserProfile(updatedUser.id, updatedUser));
   };
 
-  const cartItems = user.cart.map((c, index) => (
-    <div 
-      key={c.product.id} 
+
+  // --- Mapping Cart Items for Display ---
+  
+  // Filter out any potentially malformed items before mapping
+  const validCartItems = user.cart.filter(c => c && c.product);
+
+  const cartItems = validCartItems.map((c, index) => (
+    <div
+      key={c.product.id}
       className="flex items-center justify-between p-4 bg-white border-b border-gray-200 transition duration-150 ease-in-out hover:bg-gray-50"
     >
-      
+
       {/* Product Details (Image, Title, Description) */}
       <div className="flex items-center space-x-4 w-1/2">
         <Link to={`/product/${c.product.id}`}>
-          <img 
-            src={c.product.image} 
-            alt={c.product.title} 
-            className="w-16 h-16 object-cover rounded-md border border-gray-100" 
+          <img
+            src={c.product.image}
+            alt={c.product.title}
+            className="w-16 h-16 object-cover rounded-md border border-gray-100"
           />
         </Link>
         <div className="flex flex-col">
           <Link to={`/product/${c.product.id}`} className="text-lg font-semibold text-gray-800 hover:text-blue-600">
             {c.product.title}
           </Link>
-          <p className="text-sm text-gray-500 truncate">{c.product.description}</p>
+
           <p className="text-sm text-gray-700 font-medium md:hidden">${c.product.price.toFixed(2)}</p>
         </div>
       </div>
-      
+
       {/* Price (Desktop) */}
       <div className="hidden md:flex w-1/6 justify-center text-gray-700 font-medium">
         ${c.product.price.toFixed(2)}
@@ -110,7 +164,7 @@ const Cart = () => {
       {/* Quantity Controls */}
       <div className="w-1/4 md:w-1/6 flex justify-center items-center">
         <button
-          onClick={() => handleQuantityDecrease(index, c.product)}
+          onClick={() => handleQuantityDecrease(index)}
           disabled={c.quantity <= 1}
           className="p-1 border border-gray-300 rounded-l hover:bg-gray-100 disabled:opacity-50 cursor-pointer"
         >
@@ -123,23 +177,24 @@ const Cart = () => {
           className="w-12 text-center border-t border-b border-gray-300 text-gray-700 text-sm focus:outline-none"
         />
         <button
-          onClick={() => handleQuantityIncrease(index, c.product)}
+          onClick={() => handleQuantityIncrease(index)}
           className="p-1 border border-gray-300 rounded-r hover:bg-gray-100 cursor-pointer"
         >
           +
         </button>
       </div>
-      
+
       {/* Subtotal & Remove */}
       <div className="w-1/4 md:w-1/6 flex flex-col items-end">
         <p className="text-lg font-bold text-gray-900">
-          ${(c.product.price * c.quantity).toFixed(2)}
+          {/* Also use safe access for calculation display */}
+          ${((c.product?.price || 0) * (c.quantity || 0)).toFixed(2)} 
         </p>
-        <button 
+        <button
           onClick={() => handleRemoveItem(c.product.id)}
           className="mt-1 text-sm text-red-500 hover:text-red-700 hover:bg-gray-300 transition cursor-pointer rounded-md px-2 py-1"
-          >
-         Remove
+        >
+          Remove
         </button>
       </div>
     </div>
@@ -150,7 +205,7 @@ const Cart = () => {
       <h1 className="text-3xl font-extrabold text-gray-900 mb-6 border-b pb-2">Shopping Cart</h1>
 
       <div className="flex flex-col lg:flex-row gap-8">
-        
+
         {/* Cart Items List */}
         <div className="lg:w-3/4 bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
           {/* Header Row */}
@@ -160,16 +215,16 @@ const Cart = () => {
             <span className="w-1/6 text-center">Quantity</span>
             <span className="w-1/6 text-right">Total</span>
           </div>
-          
+
           {/* List of Items */}
           <div className="divide-y divide-gray-200">
             {cartItems}
           </div>
-          
+
           {/* Continue Shopping Link */}
           <div className="p-4 bg-white flex justify-between">
-            <Link 
-              to="/" 
+            <Link
+              to="/products"
               className="text-blue-600 hover:text-blue-800 font-medium flex items-center"
             >
               <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
@@ -182,7 +237,7 @@ const Cart = () => {
         <div className="lg:w-1/4">
           <div className="bg-gray-50 p-6 rounded-xl shadow-lg border border-gray-200 sticky top-4">
             <h2 className="text-2xl font-bold text-gray-900 mb-4 border-b pb-2">Order Summary</h2>
-            
+
             <div className="space-y-3 text-gray-700">
               <div className="flex justify-between">
                 <span>Subtotal ({user.cart.length} items)</span>
@@ -191,7 +246,7 @@ const Cart = () => {
               <div className="flex justify-between">
                 <span>Shipping Estimate</span>
                 <span className="font-medium">
-                    {shipping === 0 ? 'FREE' : `$${shipping.toFixed(2)}`}
+                  {shipping === 0 ? 'FREE' : `$${shipping.toFixed(2)}`}
                 </span>
               </div>
               <div className="flex justify-between border-b pb-3">
@@ -210,11 +265,11 @@ const Cart = () => {
               Proceed to Checkout
             </button>
             <p className="mt-3 text-xs text-gray-500 text-center">
-                Shipping and taxes calculated at checkout.
+              Shipping and taxes calculated at checkout.
             </p>
           </div>
         </div>
-        
+
       </div>
     </div>
   );

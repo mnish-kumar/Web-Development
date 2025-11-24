@@ -1,4 +1,4 @@
-import axios from '../../api/AxiosConfig';
+import axios from '../../api/Axiosconfig';
 import { loaduser, removeUser } from '../reducers/UserSlice';
 
 
@@ -26,6 +26,7 @@ export const asyncLoginUser = (user) => async (dispatch, getState) => {
     try {
         const {data} = await axios.get(`/users?email=${user.email}&password=${user.password}`);
         localStorage.setItem("user", JSON.stringify(data[0]));
+        dispatch(asyncCurrentUser());
     } catch (error) {
         console.log(error);
     }
