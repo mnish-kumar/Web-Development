@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form"; 
 import { asyncLoginUser } from '../store/actions/userAction';
 import { useDispatch } from 'react-redux';
@@ -10,10 +10,12 @@ import { useDispatch } from 'react-redux';
 const Login = () => {
   const {register, reset, handleSubmit} = useForm();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
 
   const LoginHandler = (user) => {
     dispatch(asyncLoginUser(user));
+    navigate('/products');
     reset();
   };
 
@@ -28,9 +30,7 @@ const Login = () => {
           Login Here
         </h2>
 
-        {/* Note: I removed 'flex flex-col' and am using margins for spacing */}
         <form onSubmit={handleSubmit(LoginHandler)}>
-
           {/* Email Field */}
           <div className="mb-4">
             <label htmlFor="email" className="block text-gray-700 font-medium mb-2">

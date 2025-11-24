@@ -1,12 +1,9 @@
 import { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { asyncLogOutUser } from "../store/actions/userAction";
+import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-const ProductionNav = ({ brandName = "Shopify" }) => {
+const ProductionNav = ({ brandName = "ShopVerse" }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
   const user = useSelector((state) => state.userReducer.users);
 
   // 1. Base links that are always visible
@@ -17,17 +14,10 @@ const ProductionNav = ({ brandName = "Shopify" }) => {
 
   const navLinks = [
     ...baseNavLinks,
-    ...(user
-      ? [{ name: "Create Product", path: "/admin/create-product" }]
-      : [{ name: "Login", path: "/login" }]),
+    ...(user ? (user && user?.isAdmin ? [{ name: "Create Product", path: "/admin/create-product" }] : []) : [{ name: "Login", path: "/login" }]),
   ];
 
   const closeMenu = () => setIsMenuOpen(false);
-  const handleLogout = () => {
-    dispatch(asyncLogOutUser());
-    navigate("/");
-    closeMenu();
-  };
 
   // Common Tailwind classes for links
   const linkBaseClasses = "hover:text-gray-600 transition-colors duration-200 cursor-pointer";
@@ -62,34 +52,46 @@ const ProductionNav = ({ brandName = "Shopify" }) => {
             ${isMenuOpen ? "translate-x-0" : "-translate-x-full"}
           `}
         >
-          {/* Added md:items-center to align logout button on desktop */}
-          <ul className="flex flex-col gap-8 text-lg font-medium md:flex-row md:gap-6 md:items-center">
-            {/* 4. Map over the clean navLinks array */}
-            {navLinks.map((link) => (
-              <li key={link.name}>
-                <NavLink
-                  to={link.path}
-                  className={({ isActive }) =>
-                    `${linkBaseClasses} ${isActive ? linkActiveClasses : ""}`
-                  }
-                  onClick={closeMenu} // Close menu on link click for mobile
-                >
-                  {link.name}
-                </NavLink>
-              </li>
-            ))}
+          
+        <ul className="flex flex-col gap-8 text-lg font-medium md:flex-row md:gap-6 md:items-center">
+          {navLinks.map((link) => (
+            <li key={link.name}>
+              <NavLink
+                to={link.path}
+                className={({ isActive }) =>
+                  `${linkBaseClasses} ${isActive ? linkActiveClasses : ""}`
+                }
+                onClick={closeMenu} // Close menu on link click for mobile
+              >
+              {link.name}
+              </NavLink>
+            </li>
+          ))}
 
             {user && (
+              <>  
               <li>
-                <button
-                  onClick={handleLogout}
-                  className="py-1 px-4 bg-gray-800 text-white rounded-lg shadow-md hover:bg-gray-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500"
+                <NavLink
+                  to="/cart"
+                  className={({ isActive }) => `${linkBaseClasses} ${isActive ? linkActiveClasses : ""}`}
+                  onClick={closeMenu}
                 >
-                  Log Out
-                </button>
+                  Cart
+                </NavLink>
               </li>
+              
+              <li>
+                <NavLink
+                  to="/admin/user-profile"
+                  className={({ isActive }) => `${linkBaseClasses} ${isActive ? linkActiveClasses : ""}`}
+                  onClick={closeMenu}
+                >
+                  Settings
+                </NavLink>
+              </li>
+              </> 
             )}
-          </ul>
+        </ul>
         </div>
       </nav>
     </header>

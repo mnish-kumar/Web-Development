@@ -7,7 +7,6 @@ import { useDispatch } from 'react-redux';
 
 
 
-
 const Register = () => {
   const {register, reset, handleSubmit} = useForm();
   const dispatch = useDispatch();
@@ -17,6 +16,7 @@ const Register = () => {
   const RegisterHandler = (user) => {
     user.id = nanoid();
     user.isAdmin = false;
+    user.cart = [];
     dispatch(asyncgetuser(user));
     navigate("/login");
     reset();

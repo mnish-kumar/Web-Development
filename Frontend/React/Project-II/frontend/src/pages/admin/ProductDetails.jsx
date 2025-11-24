@@ -2,10 +2,7 @@ import { useEffect, useReducer } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import {
-  asyncDeleteProduct,
-  asyncUpdateProduct,
-} from "../../store/actions/productAction";
+import { asyncDeleteProduct, asyncUpdateProduct,} from "../../store/actions/productAction";
 
 const ProductDetails = () => {
   const { id } = useParams();
@@ -14,15 +11,11 @@ const ProductDetails = () => {
     productReducer: { products },
     userReducer: { users },
   } = useSelector((state) => state);
-  const product = products.find((prod) => prod.id.toString() === id);
-  console.log(product, users);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-    setValue,
-  } = useForm();
+  const product = products.find((prod) => prod.id.toString() === id);
+  const { register, handleSubmit, formState: { errors, isSubmitting }, setValue } = useForm();
+
+
   useEffect(() => {
     if (product) {
       setValue("title", product.title);
@@ -45,8 +38,7 @@ const ProductDetails = () => {
     navigate("/products");
   };
 
-  const baseInputClass =
-    "w-full px-4 py-2 border rounded-lg outline-none focus:ring-2 transition-all duration-200";
+  const baseInputClass = "w-full px-4 py-2 border rounded-lg outline-none focus:ring-2 transition-all duration-200";
   const normalInputClass = "border-gray-300 focus:ring-amber-400";
   const errorInputClass = "border-red-500 focus:ring-red-400";
 

@@ -1,7 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 
-
 const initialState = {
     // yaha recive hua data loaduser se
     users: null,
