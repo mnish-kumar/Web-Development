@@ -8,33 +8,27 @@
 */
 
 
-// server database se connect server.js file me
-
-
 const express = require('express');
-const connectToDB = require('./src/db/db')
+require('dotenv').config();
+const connectToDB = require('./src/db/db');
 
-connectToDB();  //---> function call of server to DB connect
+connectToDB();
 
+const app = express();
 
-const app = express();   // Here, create the server
-
-
-//  ----Middleware----
 app.use(express.json());
 
-
-
-app.get ('/', (req, res) => {
-    res.send("Welcome to the Home Page");
-})
+app.get('/', (req, res) => {
+  res.send("Welcome to the Home Page");
+});
 
 app.post('/notes', (req, res) => {
-    const {title, content} = req.body;
-    console.log(title, content);
-})
+  const { title, content } = req.body;
+  console.log(title, content);
+});
 
+const PORT = process.env.PORT || 3000;
 
-app.listen(3000, () => {
-    console.log("Server is running on PORT 3000....");
-})
+app.listen(PORT, () => {
+  console.log(`Server is running on PORT ${PORT}....`);
+});

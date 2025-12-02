@@ -1,13 +1,20 @@
 const mongoose = require('mongoose');
+require('dotenv').config();
 
+function connectToDB() {
+  const url = process.env.MONGO_URL;
+  if (!url) {
+    console.error("MONGO_URL is not defined in .env");
+    return;
+  }
 
-// Server databse se connect kaise hoga, wo tum db.js file me likhoge
-
-function connectToDB(){
-    mongoose.connect("mongodb+srv://manishkrsmi_db_user:18j2OyocwhG08f83@cluster0.mvw3nbj.mongodb.net/cohort")
+  mongoose.connect(url)
     .then(() => {
-        console.log("Connected to DB");
+      console.log("Connected to DB");
     })
+    .catch((err) => {
+      console.error("Failed to connect to DB:", err.message);
+    });
 }
 
 module.exports = connectToDB;
