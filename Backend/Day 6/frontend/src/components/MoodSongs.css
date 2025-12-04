@@ -1,0 +1,72 @@
+
+.songs-panel {
+	background: radial-gradient(circle at top right, #020617, #020617);
+	border-radius: 20px;
+	padding: 24px 24px 28px;
+	box-shadow: 0 24px 60px rgba(15, 23, 42, 0.8);
+	border: 1px solid rgba(148, 163, 184, 0.25);
+	color: #e5e7eb;
+}
+
+.songs-header {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	margin-bottom: 16px;
+}
+
+.songs-header h2 {
+	margin: 0;
+	font-size: 1.25rem;
+}
+
+.songs-header span {
+	font-size: 0.8rem;
+	color: #9ca3af;
+}
+
+.songs-list {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.song-card {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px 12px;
+	border-radius: 12px;
+	background: rgba(15, 23, 42, 0.7);
+	border: 1px solid rgba(55, 65, 81, 0.8);
+}
+
+.song-meta h3 {
+	margin: 0;
+	font-size: 0.95rem;
+}
+
+.song-meta p {
+	margin: 2px 0 0;
+	font-size: 0.8rem;
+	color: #9ca3af;
+}
+
+.audio-player {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.audio-player i {
+	font-size: 1.1rem;
+	color: #e5e7eb;
+	cursor: pointer;
+}
+
+@media (max-width: 900px) {
+	.app-shell {
+		grid-template-columns: 1fr;
+	}
+}
+
