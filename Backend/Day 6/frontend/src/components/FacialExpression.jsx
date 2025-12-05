@@ -1,7 +1,9 @@
 import { useRef, useEffect, useState, useCallback } from "react";
 import * as faceapi from "face-api.js";
+import axios from "axios";
+import {toast} from "react-toastify"
 
-export default function FaceEmotion() {
+export default function FaceEmotion({setsongs}) {
   const videoRef = useRef();
   const [status, setStatus] = useState("Loading models...");
   const [stream, setStream] = useState(null);
@@ -44,18 +46,17 @@ export default function FaceEmotion() {
       
       videoRef.current.onloadedmetadata = () => {
         videoRef.current.play();
-        runDetectionLoop();
       };
     } catch (err) {
       setStatus("Camera access denied: " + err.message);
     }
   }, []);
 
-  // Detection loop with requestAnimationFrame
-//   const runDetectionLoop = useCallback(() => {
-//     // no-op now; left here in case you want a loop later
-//   }, []);
+  //  Detection loop with requestAnimationFrame
+  
 
+
+  // Mood detection button
   const detectMood = useCallback(async () => {
     if (!videoRef.current) return;
 
@@ -79,14 +80,21 @@ export default function FaceEmotion() {
           { name: null, value: 0 }
         );
 
-        const label = `${maxExpression.name}`;
-        console.log(label);
+        
+        // get api hit karna hai -> http://localhost:3000/songs?mood=happy
+        const expression = `${maxExpression.name}`;
+        axios.get(`http://localhost:3000/songs?mood=${expression}`)
+        .then(response => {
+          setsongs(response.data.songs);
+          toast.success(`Mood fetched: ${expression}.`);
+        })
       }
     } catch (err) {
       console.error("Detection error:", err);
       setStatus("Detection error: " + err.message);
+      toast.error("Detection error");
     }
-  }, []);
+  }, [setsongs]);
 
 
   return (
