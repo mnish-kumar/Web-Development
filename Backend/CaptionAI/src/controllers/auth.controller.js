@@ -30,33 +30,6 @@ async function registerController(req, res) {
     })
 }
 
-async function userController(req, res) {
-    const token = req.cookies.token;
-
-    if (!token){
-        return res.status(401).json({
-            message: "Unauthorized token not valid."
-        })
-    }
-
-    try{
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-        const user = await userModel.findOne({
-            _id: decoded.id,
-        })
-
-        return res.status(201).json({
-            message: "User fetch successfully...",
-            user,
-        })
-    }
-    catch(err) {
-        return res.status().json({
-            message: "Unauthorized invalid token",
-        });
-    }
-}
 
 async function loginController(req, res) {
     // Login logic goes here
@@ -65,7 +38,7 @@ async function loginController(req, res) {
 
     const user = await userModel.findOne({
         username,
-    })
+    }).select('-__v');
 
     if (!user){
         return res.status(404).json({
@@ -94,6 +67,5 @@ async function loginController(req, res) {
 
 module.exports = {
     registerController,
-    userController,
     loginController,
 }

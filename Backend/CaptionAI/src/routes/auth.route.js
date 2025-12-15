@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const {
     registerController , 
-    userController, 
     loginController
 } = require('../controllers/auth.controller');
 
@@ -11,10 +10,12 @@ const {
     GET /auth/user      -> (Protected API) = req.cookies.token
     POST /auth/login    -> req.body = {username, password}
     GET /auth/logout    -> clears the token cookie
+
+
+    POST/api/post -> req.body = {imageUrl} , (Protected API) = req.cookies.token
 */
 
 router.post('/register', registerController)
-router.get('/user', userController);
 router.post('/login', loginController);
 
 module.exports = router;
