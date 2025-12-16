@@ -1,16 +1,18 @@
 const Imagekit = require('imagekit');
 
-var imagekit = new Imagekit({
+const imagekit = new Imagekit({
     publicKey : process.env.IMAGE_KIT_PUBLIC_KEY,
     privateKey : process.env.IMAGE_KIT_PRIVATE_KEY,
     urlEndpoint : process.env.IMAGE_KIT_URL_ENDPOINT,
 });
 
-function uploadFileToImagekit(file){
+
+
+function uploadFileToImagekit(file, fileName){
     return new Promise((resolve, reject) => {
         imagekit.upload({
             file : file.buffer,
-            fileName : file.originalname,
+            fileName : fileName,
             folder : 'Caption-ai-images',
         }, (error, result) => {
             if(error){
