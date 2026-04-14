@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { clearAuth, getToken, getUsername } from '../auth'
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:3000'
 
@@ -12,11 +11,10 @@ const Dashboard = () => {
   const [error, setError] = useState('')
   const navigate = useNavigate()
 
-  const username = getUsername()
-  const token = getToken()
+  const { user } = useAuth();
+  const username = user?.username;
 
   const handleLogout = () => {
-    clearAuth()
     navigate('/login')
   }
 
@@ -45,7 +43,7 @@ const Dashboard = () => {
   const handleGenerate = async (event) => {
     event.preventDefault()
 
-    if (!token) {
+    if (!user) {
       setError('You are not authenticated. Please login again.')
       return
     }
@@ -66,7 +64,7 @@ const Dashboard = () => {
       const response = await fetch(`${API_BASE_URL}/api/posts`, {
         method: 'POST',
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${user?.token}`,
         },
         body: formData,
       })
