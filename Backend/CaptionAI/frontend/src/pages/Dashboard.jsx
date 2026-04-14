@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { clearAuth, getToken, getUsername } from '../auth'
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:3000'
+
 const Dashboard = () => {
   const [selectedFile, setSelectedFile] = useState(null)
   const [previewUrl, setPreviewUrl] = useState('')
@@ -61,7 +63,7 @@ const Dashboard = () => {
       const formData = new FormData()
       formData.append('image', selectedFile)
 
-      const response = await fetch('http://localhost:3000/api/post/upload', {
+      const response = await fetch(`${API_BASE_URL}/api/posts`, {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,

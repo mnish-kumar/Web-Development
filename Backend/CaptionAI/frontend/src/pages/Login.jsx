@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { saveAuth } from '../auth'
+import axios from 'axios';
+
 
 const Login = () => {
   const [username, setUsername] = useState('')
@@ -21,28 +23,9 @@ const Login = () => {
     setError('')
 
     try {
-      const response = await fetch('http://localhost:3000/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
-      })
+      const response = await axios.post('http://localhost:3000/api/auth/login', { username, password })
 
-      if (!response.ok) {
-        const data = await response.json().catch(() => null)
-        const message = data?.message || 'Login failed. Please check your details.'
-        throw new Error(message)
-      }
-
-      const data = await response.json()
-      const token = data?.token
-
-      if (!token) {
-        throw new Error('No token received from server.')
-      }
-
-      saveAuth(token, username)
+      saveAuth(response.data.token, username)
       navigate('/dashboard')
     } catch (err) {
       setError(err.message || 'Something went wrong. Please try again.')

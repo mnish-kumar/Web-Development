@@ -3,11 +3,17 @@ const jwt = require('jsonwebtoken');
 
 
 async function authMiddleware(req, res, next) {
-    const token = req.cookies.token;
+    const headerValue = req.headers.authorization;
+    const bearerToken = headerValue && headerValue.startsWith('Bearer ')
+        ? headerValue.slice('Bearer '.length)
+        : null;
 
-    if (!token){
+    const cookieToken = req.cookies?.token;
+    const token = bearerToken || cookieToken;
+
+    if (!token) {
         return res.status(401).json({
-            message: "Unauthorized token, please login."
+            message: 'Unauthorized token, please login.',
         })
     }
 
@@ -17,6 +23,12 @@ async function authMiddleware(req, res, next) {
         const user = await userModel.findOne({
             _id: decoded.id,
         });
+
+        if (!user) {
+            return res.status(401).json({
+                message: 'Unauthorized token, user not found.',
+            })
+        }
 
         req.user = user;
         next();
