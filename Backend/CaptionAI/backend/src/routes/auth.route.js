@@ -1,9 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const {
-    registerController , 
-    loginController
-} = require('../controllers/auth.controller');
+const authController = require('../controllers/auth.controller');
+const authMiddleware = require('../middlewares/auth.middleware');
 
 /*
     POST /auth/register -> req.body = {username, password}
@@ -15,7 +13,11 @@ const {
     POST/api/post -> req.body = {imageUrl} , (Protected API) = req.cookies.token
 */
 
-router.post('/register', registerController)
-router.post('/login', loginController);
+router.post('/register', authController.registerController);
+router.post('/login', authController.loginController);
+
+router.get('/me',  authMiddleware, authController.meController);
+
+router.post('/logout', authController.logoutController);
 
 module.exports = router;

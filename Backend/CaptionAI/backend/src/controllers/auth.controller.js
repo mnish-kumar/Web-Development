@@ -51,7 +51,6 @@ async function registerController(req, res) {
     })
 }
 
-
 async function loginController(req, res) {
     // Login logic goes here
     const {username, password} = req.body;
@@ -111,8 +110,52 @@ async function loginController(req, res) {
 
 }
 
+async function meController(req, res) {
+    // Get current user logic goes here
+    try {
+        const user = req.user;
+
+        if (!user) {
+            return res.status(404).json({
+                message: 'User not found.'
+            })
+        }
+
+        res.status(200).json({
+            message: 'User data fetched successfully.',
+            currentUser: user,
+        })
+    }catch (error) {
+        console.error('Error in meController:', error);
+        res.status(500).json({
+            message: 'An error occurred while fetching user data.'
+        });
+    }
+}
+
+async function logoutController(req, res) {
+    const token = req.cookies.token;
+
+    if (!token) {
+        return res.status(400).json({
+            message: 'No token provided.'
+        })
+    }
+
+    res.clearCookie('token', {
+        httpOnly: true,
+        secure: true,
+    });
+
+    return res.status(200).json({
+        message: 'Logout successful.'
+    })
+}
+
 
 module.exports = {
     registerController,
     loginController,
+    meController,
+    logoutController,
 }
