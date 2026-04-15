@@ -1,27 +1,37 @@
-import { createContext, useEffect } from "react";
+import { createContext, useEffect, useState } from "react";
+import { getMe } from "../api/auth.api";
 
 export const AuthContext = createContext(null);
 
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [isloading, setLoading] = useState(true);
+    const [error, setError] = useState('')
 
     useEffect(() => {
-        const storedUser = localStorage.getItem("user");
-        if (storedUser) {
-            setUser(JSON.parse(storedUser));
-        }
-        setLoading(false);
-
-        storedUser();
+        const checkAuth  = async () => {
+            try {
+                const userData = await getMe();
+                console.log('Authenticated user:', userData);
+                setUser(userData.currentUser);
+            } catch (error) {
+                setUser(null);
+                setError(error.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+        checkAuth();
     }, []);
 
     const value = {
         user,
         setUser,
-        loading,
+        isloading,
         setLoading,
+        error,
+        setError,
     }
 
     return (

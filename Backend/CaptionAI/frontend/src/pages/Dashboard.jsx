@@ -1,20 +1,29 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../auth/hooks/use.auth'
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:3000'
+
+
 
 const Dashboard = () => {
   const [selectedFile, setSelectedFile] = useState(null)
   const [previewUrl, setPreviewUrl] = useState('')
   const [caption, setCaption] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState('')
   const navigate = useNavigate()
 
-  const { user } = useAuth();
+  const { user, handleLogout, isloading, error, setError, handleCreatePost } = useAuth();
   const username = user?.username;
 
-  const handleLogout = () => {
+  useEffect(() => {
+    return () => {
+      if (previewUrl) {
+        URL.revokeObjectURL(previewUrl)
+      }
+    }
+  }, [previewUrl])
+
+  const logoutHandle = () => {
+    handleLogout();
     navigate('/login')
   }
 
@@ -22,6 +31,7 @@ const Dashboard = () => {
     const file = event.target.files && event.target.files[0]
     if (!file) {
       setSelectedFile(null)
+      if (previewUrl) URL.revokeObjectURL(previewUrl)
       setPreviewUrl('')
       return
     }
@@ -29,6 +39,7 @@ const Dashboard = () => {
     if (!file.type.startsWith('image/')) {
       setError('Please select a valid image file.')
       setSelectedFile(null)
+      if (previewUrl) URL.revokeObjectURL(previewUrl)
       setPreviewUrl('')
       return
     }
@@ -36,6 +47,7 @@ const Dashboard = () => {
     setError('')
     setCaption('')
     setSelectedFile(file)
+    if (previewUrl) URL.revokeObjectURL(previewUrl)
     const url = URL.createObjectURL(file)
     setPreviewUrl(url)
   }
@@ -53,40 +65,16 @@ const Dashboard = () => {
       return
     }
 
-    setIsLoading(true)
     setError('')
     setCaption('')
 
     try {
-      const formData = new FormData()
-      formData.append('image', selectedFile)
-
-      const response = await fetch(`${API_BASE_URL}/api/posts`, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${user?.token}`,
-        },
-        body: formData,
-      })
-
-      if (!response.ok) {
-        if (response.status === 401) {
-          clearAuth()
-          navigate('/login')
-          throw new Error('Session expired. Please login again.')
-        }
-        const data = await response.json().catch(() => null)
-        const message = data?.message || 'Failed to generate caption. Please try again.'
-        throw new Error(message)
-      }
-
-      const data = await response.json()
+      const { postData } = await handleCreatePost({ image: selectedFile });
+      const data = postData || {};
       const generatedCaption = data?.caption || data?.message || 'No caption returned.'
       setCaption(generatedCaption)
     } catch (err) {
       setError(err.message || 'Something went wrong. Please try again.')
-    } finally {
-      setIsLoading(false)
     }
   }
 
@@ -94,22 +82,16 @@ const Dashboard = () => {
     <div className="app-root">
       <div className="card dashboard-card">
         <header className="dash-header">
-          <div>
-            <h1 className="title">CaptionAI Dashboard</h1>
+          <div className='username-header'>
+            <h1 className="title">Capify-AI</h1>
             <p className="subtitle">
-              {username ? `Logged in as ${username}` : 'You are authenticated.'}
+              {`Welcome dear🎉:) ${username}`}
             </p>
           </div>
-          <button type="button" className="secondary-button" onClick={handleLogout}>
+          <button type="button" className="secondary-button" onClick={logoutHandle}>
             Logout
           </button>
         </header>
-
-        {!token && (
-          <p className="message error">
-            You are not authenticated. Please login again.
-          </p>
-        )}
 
         <form className="form" onSubmit={handleGenerate}>
           <label className="file-label">
@@ -131,9 +113,9 @@ const Dashboard = () => {
           <button
             type="submit"
             className="primary-button"
-            disabled={!selectedFile || isLoading}
+            disabled={!selectedFile || isloading}
           >
-            {isLoading ? 'Generating...' : 'Generate Caption'}
+            {isloading ? 'Generating...' : 'Generate Caption'}
           </button>
         </form>
 

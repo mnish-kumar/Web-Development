@@ -10,13 +10,13 @@ const authMiddleware = require('../middlewares/auth.middleware');
     GET /auth/logout    -> clears the token cookie
 
 
-    POST/api/post -> req.body = {imageUrl} , (Protected API) = req.cookies.token
+    POST/api/post -> req.body = {image} , (Protected API) = req.cookies.token
 */
 
 router.post('/register', authController.registerController);
 router.post('/login', authController.loginController);
 
-router.get('/me',  authMiddleware, authController.meController);
+router.get('/me', authMiddleware, authController.meController);
 
 router.post('/logout', authController.logoutController);
 

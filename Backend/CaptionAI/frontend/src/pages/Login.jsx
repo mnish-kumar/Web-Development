@@ -1,35 +1,36 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import axios from 'axios';
+import { useAuth } from '../auth/hooks/use.auth'
 
 
 const Login = () => {
   const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState('')
+  
   const navigate = useNavigate()
+
+  const { handleLogin, error, setError, isloading, setLoading } = useAuth()
 
   const handleSubmit = async (event) => {
     event.preventDefault()
 
-    if (!username || !password) {
-      setError('Please enter both username and password.')
+    if (!username || !password || !email) {
+      setError('Please enter all required fields.')
       return
     }
 
-    setIsLoading(true)
+    setLoading(true)
     setError('')
 
     try {
-      const response = await axios.post('http://localhost:3000/api/auth/login', { username, password })
+      await handleLogin({ username, email, password });
 
-      saveAuth(response.data.token, username)
       navigate('/dashboard')
     } catch (err) {
       setError(err.message || 'Something went wrong. Please try again.')
     } finally {
-      setIsLoading(false)
+      setLoading(false)
     }
   }
 
@@ -52,6 +53,21 @@ const Login = () => {
               autoComplete="username"
             />
           </div>
+          {/* {error && <p className="error-message">{error}</p>} */}
+
+          <div className="field">
+            <label className="field-label" htmlFor="email">Email</label>
+            <input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="text-input"
+              placeholder="Enter email"
+              autoComplete="email"
+            />
+          </div>
+          {/* {error && <p className="error-message">{error}</p>} */}
 
           <div className="field">
             <label className="field-label" htmlFor="password">Password</label>
@@ -65,18 +81,18 @@ const Login = () => {
               autoComplete="current-password"
             />
           </div>
+          {/* {error && <p className="error-message">{error}</p>} */}
 
           <button
             type="submit"
             className="primary-button"
-            disabled={!username || !password || isLoading}
+            disabled={!username || !password || !email || isloading}
           >
-            {isLoading ? 'Logging in...' : 'Login'}
+            {isloading ? 'Logging in...' : 'Login'}
           </button>
         </form>
 
-        {error && <p className="message error">{error}</p>}
-
+        {error && <p className="error-message">{error}</p>}
         <p className="auth-switch">
           New here?{' '}
           <Link to="/register" className="auth-link">Create an account</Link>

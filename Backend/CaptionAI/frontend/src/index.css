@@ -49,7 +49,12 @@ body {
   margin: 0 0 1.5rem;
   font-size: 0.95rem;
   color: #6b7280;
-  text-align: center;
+}
+
+.username-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .form {
@@ -140,7 +145,7 @@ body {
 }
 
 .message.error {
-  color: #b91c1c;
+  color: #d31d1d;
 }
 
 .caption-box {
@@ -231,8 +236,8 @@ body {
   font-size: 0.85rem;
   font-weight: 500;
   font-family: inherit;
-  background-color: #f9fafb;
-  color: #374151;
+  background-color: #ef4848;
+  color: #f1f1f1;
   cursor: pointer;
   transition: background-color 0.15s ease, border-color 0.15s ease;
 }
@@ -240,6 +245,7 @@ body {
 .secondary-button:hover {
   background-color: #f3f4f6;
   border-color: #d1d5db;
+  color: #111827;
 }
 
 @media (max-width: 480px) {

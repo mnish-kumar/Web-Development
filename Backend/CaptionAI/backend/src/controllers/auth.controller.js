@@ -1,7 +1,6 @@
 const userModel = require('../models/User.model');
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
-
+const bcrypt = require('bcrypt')
 
 
 async function registerController(req, res) {
@@ -46,8 +45,8 @@ async function registerController(req, res) {
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
     res.cookie('token', token, {
         httpOnly: true,
-        secure: true,
-    })
+        secure: true
+    });
 
     res.status(201).json({
         message:"User created succesfully...",
@@ -57,11 +56,11 @@ async function registerController(req, res) {
 
 async function loginController(req, res) {
     // Login logic goes here
-    const { username, email, password } = req.body;
+    const { email, password, username } = req.body;
 
-    if (!username || !password || !email) {
+    if (!username || !email || !password) {
         return res.status(400).json({
-            message: 'username, email, and password are required.'
+            message: 'All fields are required.'
         })
     }
 
@@ -71,12 +70,7 @@ async function loginController(req, res) {
         })
     }
 
-    const user = await userModel.findOne({
-        $or: [
-            { username },
-            { email },
-        ]
-    });
+    const user = await userModel.findOne({ email });
 
     if (!user){
         return res.status(404).json({
@@ -84,13 +78,7 @@ async function loginController(req, res) {
         })
     }
 
-    if (!user.password) {
-        return res.status(400).json({
-            message: 'User has no password set. Please register again.'
-        })
-    }
-
-    const passwordMatch = await bcrypt.compare(String(password), String(user.password));
+    const passwordMatch = await bcrypt.compare(password, user.password);
 
     if (!passwordMatch){
         return res.status(400).json({
@@ -101,8 +89,8 @@ async function loginController(req, res) {
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
     res.cookie('token', token, {
         httpOnly: true,
-        secure: true,
-    })
+        secure: true
+    });
 
     return res.status(200).json({
         message: "Login successful...",
@@ -117,15 +105,16 @@ async function meController(req, res) {
         const user = req.user;
 
         if (!user) {
-            return res.status(404).json({
-                message: 'User not found.'
-            })
+            return res.status(200).json({
+                message: 'Not authenticated.',
+                currentUser: null,
+            });
         }
 
-        res.status(200).json({
+        return res.status(200).json({
             message: 'User data fetched successfully.',
             currentUser: user,
-        })
+        });
     }catch (error) {
         console.error('Error in meController:', error);
         res.status(500).json({
@@ -145,7 +134,7 @@ async function logoutController(req, res) {
 
     res.clearCookie('token', {
         httpOnly: true,
-        secure: true,
+        secure: true
     });
 
     return res.status(200).json({

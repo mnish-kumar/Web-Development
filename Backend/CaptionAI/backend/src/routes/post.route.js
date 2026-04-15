@@ -10,7 +10,7 @@ const upload = multer({
 });
 
 
-/* POST/api/post -> req.body ={imageUrl},(Protected API) = req.cookies.token*/
+/* POST /api/posts -> multipart/form-data { image }, (Protected API) = req.cookies.token */
 router.post('/', 
     authMiddleware, 
     upload.single('image'),

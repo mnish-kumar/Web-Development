@@ -1,34 +1,45 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import { useAuth } from '../auth/hooks/use.auth'
 
 const Register = () => {
   const [username, setUsername] = useState('')
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState('')
   const navigate = useNavigate()
+
+  const { handleRegister, error, setError, isloading, setLoading } = useAuth();
 
   const handleSubmit = async (event) => {
     event.preventDefault()
 
-    if (!username || !password) {
-      setError('Please enter both username and password.')
+    if (!username || !name || !email || !password) {
+      setError('Please fill in all fields.')
       return
     }
 
-    setIsLoading(true)
+    const data = {
+      username,
+      name,
+      email,
+      password,
+    };
+    setLoading(true)
     setError('')
 
     try {
-      const response = await axios.post('http://localhost:3000/api/auth/register', { username, password });
+      await handleRegister(data);
 
-      
+      setEmail('')
+      setPassword('')
+      setUsername('')
+      setName('')
       navigate('/login')
     } catch (err) {
       setError(err.message || 'Something went wrong. Please try again.')
     } finally {
-      setIsLoading(false)
+      setLoading(false)
     }
   }
 
@@ -53,6 +64,32 @@ const Register = () => {
           </div>
 
           <div className="field">
+            <label className="field-label" htmlFor="name">Name</label>
+            <input
+              id="name"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="text-input"
+              placeholder="Enter name"
+              autoComplete="name"
+            />
+          </div>
+
+          <div className="field">
+            <label className="field-label" htmlFor="email">Email</label>
+            <input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="text-input"
+              placeholder="Enter email"
+              autoComplete="email"
+            />
+          </div>
+
+          <div className="field">
             <label className="field-label" htmlFor="password">Password</label>
             <input
               id="password"
@@ -68,9 +105,9 @@ const Register = () => {
           <button
             type="submit"
             className="primary-button"
-            disabled={!username || !password || isLoading}
+            disabled={!username || !name || !email || !password || isloading}
           >
-            {isLoading ? 'Creating account...' : 'Register'}
+            {isloading ? 'Creating account...' : 'Register'}
           </button>
         </form>
 
