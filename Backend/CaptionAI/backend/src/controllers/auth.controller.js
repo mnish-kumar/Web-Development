@@ -6,11 +6,11 @@ const bcrypt = require('bcrypt');
 
 async function registerController(req, res) {
     // Registration logic goes here
-    const {username, password} = req.body;
+    const { username, name, email, password } = req.body;
 
-    if (!username || !password) {
+    if (!username || !name || !email || !password) {
         return res.status(400).json({
-            message: 'username and password are required.'
+            message: 'All fields are required.'
         })
     }
 
@@ -20,44 +20,48 @@ async function registerController(req, res) {
         })
     }
 
-    const userExist = await userModel.findOne({username});
+    const userExist = await userModel.findOne({ 
+        $or: [
+            { username },
+            { email },
+        ]
+     });
 
     if (userExist){
         return res.status(409).json({
-            message: "username already exist..."
+            message: "username or email already exist..."
         })
     }
 
+    const genSalt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(String(password), genSalt);
+
     const user = await userModel.create({
         username,
-        password: await bcrypt.hash(password, 10),
+        name,
+        email,
+        password: hashedPassword,
     });
 
-    const safeUser = {
-        _id: user._id,
-        username: user.username,
-    }
-
-    const token = jwt.sign({id: user._id}, process.env.JWT_SECRET);
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
     res.cookie('token', token, {
         httpOnly: true,
-        sameSite: 'lax',
+        secure: true,
     })
 
     res.status(201).json({
         message:"User created succesfully...",
-        token,
-        user: safeUser,
+        user,
     })
 }
 
 async function loginController(req, res) {
     // Login logic goes here
-    const {username, password} = req.body;
+    const { username, email, password } = req.body;
 
-    if (!username || !password) {
+    if (!username || !password || !email) {
         return res.status(400).json({
-            message: 'username and password are required.'
+            message: 'username, email, and password are required.'
         })
     }
 
@@ -68,7 +72,10 @@ async function loginController(req, res) {
     }
 
     const user = await userModel.findOne({
-        username,
+        $or: [
+            { username },
+            { email },
+        ]
     });
 
     if (!user){
@@ -91,21 +98,15 @@ async function loginController(req, res) {
         })
     }
 
-    const token = jwt.sign({id: user._id}, process.env.JWT_SECRET);
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
     res.cookie('token', token, {
         httpOnly: true,
-        sameSite: 'lax',
+        secure: true,
     })
-
-    const safeUser = {
-        _id: user._id,
-        username: user.username,
-    }
 
     return res.status(200).json({
         message: "Login successful...",
-        token,
-        user: safeUser,
+        user,
     })
 
 }
