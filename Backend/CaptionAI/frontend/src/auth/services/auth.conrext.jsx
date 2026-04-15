@@ -13,7 +13,6 @@ export const AuthProvider = ({ children }) => {
         const checkAuth  = async () => {
             try {
                 const userData = await getMe();
-                console.log('Authenticated user:', userData);
                 setUser(userData.currentUser);
             } catch (error) {
                 setUser(null);

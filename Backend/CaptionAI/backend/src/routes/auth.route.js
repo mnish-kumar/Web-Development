@@ -16,7 +16,8 @@ const authMiddleware = require('../middlewares/auth.middleware');
 router.post('/register', authController.registerController);
 router.post('/login', authController.loginController);
 
-router.get('/me', authMiddleware, authController.meController);
+// Returns 200 even when not logged in: { currentUser: null }
+router.get('/me', authMiddleware({ required: false }), authController.meController);
 
 router.post('/logout', authController.logoutController);
 

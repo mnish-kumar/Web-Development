@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const authMiddleware = require('../middlewares/auth.middleware');
+const authMiddleware  = require('../middlewares/auth.middleware');
 const multer = require('multer');
 const { createPostController } = require('../controllers/post.controller');
 
@@ -12,7 +12,7 @@ const upload = multer({
 
 /* POST /api/posts -> multipart/form-data { image }, (Protected API) = req.cookies.token */
 router.post('/', 
-    authMiddleware, 
+    authMiddleware({ required: true }), 
     upload.single('image'),
     createPostController // req.user = userData
 );
