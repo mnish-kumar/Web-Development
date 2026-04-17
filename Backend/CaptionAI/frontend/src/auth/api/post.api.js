@@ -7,8 +7,8 @@ const api = axios.create({
 export async function createPost(formData) {
   try {
     const response = await api.post(
-      "http://localhost:3000/api/posts",
-      formData,
+      "/api/posts",
+      formData
     );
     return response.data;
   } catch (error) {

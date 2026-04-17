@@ -6,7 +6,7 @@ const api = axios.create({
 
 export async function register({ username, name, email, password }) {
     try {
-        const response = await api.post('http://localhost:3000/api/auth/register', { username, name, email, password });
+        const response = await api.post('/api/auth/register', { username, name, email, password });
         return response.data;
     } catch (error) {
         console.error("Register API error:", error);
@@ -14,9 +14,9 @@ export async function register({ username, name, email, password }) {
     }
 }
 
-export async function login ({ username, email, password }) {
+export async function login({ username, email, password }) {
     try {
-        const response = await api.post('http://localhost:3000/api/auth/login', { username, email, password });
+        const response = await api.post('/api/auth/login', { username, email, password });
         return response.data;
     } catch (error) {
         console.error("Login API error:", error);
@@ -26,7 +26,7 @@ export async function login ({ username, email, password }) {
 
 export async function getMe() {
     try {
-        const response = await api.get('http://localhost:3000/api/auth/me');
+        const response = await api.get('/api/auth/me');
         return response.data;
     } catch (error) {
         console.error("GetMe API error:", error);
@@ -34,9 +34,9 @@ export async function getMe() {
     }
 }
 
-export async function logout(){
+export async function logout() {
     try {
-        const response = await api.post('http://localhost:3000/api/auth/logout');
+        const response = await api.post('/api/auth/logout');
         console.log("Logout response:", response.data);
         return response.data;
     } catch (error) {
